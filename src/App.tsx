@@ -10,6 +10,7 @@ import HomePage from "./pages/HomePage";
 import StartPage from "./pages/StartPage";
 import AboutUs from "./pages/AboutUs";
 import Tutorial from "./pages/Tutorial";
+import { HackingPage } from "./pages/HackingPage";
 import 'bootstrap/dist/css/bootstrap.min.css';
 
 export const queryClient = new QueryClient();
@@ -35,6 +36,7 @@ function AppWithRecoil() {
         <Route path={PATHS.aboutUs}  element = {<AboutUs />} />
         <Route path={PATHS.tutorial} element = {<Tutorial />} />
         <Route path={PATHS.createFile} element={<MainPage />} />
+        <Route path={PATHS.hacking} element={<HackingPage />} />
         <Route
           path={PATHS.downloadFile}
           element={

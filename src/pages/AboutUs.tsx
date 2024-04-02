@@ -2,6 +2,7 @@ import { Link } from 'react-router-dom';
 import { PATHS } from "../consts/paths";
 import Container from 'react-bootstrap/Container';
 import Navbar from 'react-bootstrap/Navbar';
+import { NavItem } from 'react-bootstrap';
 const AboutUs = () =>{
   return(<div>
     <Navbar bg="dark" data-bs-theme="dark" className='justify-content-center '>
@@ -9,7 +10,7 @@ const AboutUs = () =>{
         About Us
       </Navbar.Brand>
         <Link to={PATHS.home} className='me-auto'>Home</Link>
-        <Link to={PATHS.aboutUs} className='me-auto'>About Us</Link>
+        <NavItem className='me-auto text-secondary'>About Us</NavItem>
         <Link to={PATHS.tutorial} className='me-auto'>Tutorial</Link>
         <Link to={PATHS.createFile} className='me-auto'>Go to Test-Generator</Link>
       <Container>
@@ -21,11 +22,11 @@ const AboutUs = () =>{
         </Navbar.Collapse>
       </Container>
     </Navbar>
-    <h1>AboutUs</h1>
+    <h1>About Us</h1>
     <h3>Developers</h3>
     <ul>
       <li>
-        Ahmet Kaan Avci
+        Ahmet Kaan Avcı
       </li>
       <li>
         Esat Okcu

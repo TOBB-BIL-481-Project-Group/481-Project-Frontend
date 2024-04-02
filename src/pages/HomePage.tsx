@@ -2,13 +2,14 @@ import { Link } from 'react-router-dom';
 import { PATHS } from "../consts/paths";
 import Container from 'react-bootstrap/Container';
 import Navbar from 'react-bootstrap/Navbar';
+import { NavItem } from 'react-bootstrap';
 const HomePage = () => {
   return (<div>
     <Navbar bg="dark" data-bs-theme="dark" className='justify-content-center '>
       <Navbar.Brand>
         Home
       </Navbar.Brand>
-        <Link to={PATHS.home} className='me-auto'>Home</Link>
+        <NavItem className='me-auto text-secondary'>Home</NavItem>
         <Link to={PATHS.aboutUs} className='me-auto'>About Us</Link>
         <Link to={PATHS.tutorial} className='me-auto'>Tutorial</Link>
         <Link to={PATHS.createFile} className='me-auto'>Go to Test-Generator</Link>

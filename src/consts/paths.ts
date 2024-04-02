@@ -3,6 +3,7 @@ export const PATHS = {
   home: "/home",
   aboutUs: "/home/about-us",
   tutorial: "/home/tutorial",
-  createFile: "/main",
+  createFile: "/main-1",
   downloadFile: "/download",
+  hacking: "/main-2",
 };

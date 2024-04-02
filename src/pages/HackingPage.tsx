@@ -45,7 +45,7 @@ type ConstrainedVariableType = {
   sumValue: number;
 };
 
-export function MainPage() {
+export function HackingPage() {
   const [variableLetters, setVariableLetters] = useState([] as string[]);
   const [variablesAllInOne, setVariablesAllInOne] = useState([] as any[]);
   const [savedInputs, setSavedInputs] = useState([] as any[]);
@@ -417,10 +417,10 @@ export function MainPage() {
     </Navbar>
     <Navbar bg="gray" data-bs-theme="light" className='justify-content-center '>
       <Navbar.Brand className="ml-1">
-        In/Out Page
+        Hacking Page
       </Navbar.Brand>
-        <NavItem className='ml-4 text-secondary'>In/Out Page</NavItem>
-        <Link to={PATHS.hacking} className='ml-5 text-danger'>Hacking Page</Link>
+        <Link to={PATHS.createFile} className='ml-4 text-danger'>In/Out Page</Link>
+        <NavItem className='ml-5 text-secondary'>Hacking Page</NavItem>
         <Container>
         </Container>
     </Navbar>
@@ -969,6 +969,13 @@ export function MainPage() {
               }}
             />
           </div>
+        </div>
+        <div className="w-fit mt-12">
+          <Input
+            type="file"
+            accept=".cpp"
+            onChange={(e) => setCodeFileFunc(e.target.files)}
+          />
         </div>
         <div className="w-fit mt-12">
           <Input

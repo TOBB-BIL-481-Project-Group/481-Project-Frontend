@@ -3,6 +3,7 @@ import { PATHS } from "../consts/paths";
 import YouTube from 'react-youtube';
 import Container from 'react-bootstrap/Container';
 import Navbar from 'react-bootstrap/Navbar';
+import { NavItem } from 'react-bootstrap';
 
 const Tutorial = () =>{
   const videoId = "m6OxMCDHz3E";
@@ -21,7 +22,7 @@ const Tutorial = () =>{
       </Navbar.Brand>
         <Link to={PATHS.home} className='me-auto'>Home</Link>
         <Link to={PATHS.aboutUs} className='me-auto'>About Us</Link>
-        <Link to={PATHS.tutorial} className='me-auto'>Tutorial</Link>
+        <NavItem className='me-auto text-secondary'>Tutorial</NavItem>
         <Link to={PATHS.createFile} className='me-auto'>Go to Test-Generator</Link>
       <Container>
         <Navbar.Toggle />
