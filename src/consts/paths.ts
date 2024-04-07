@@ -7,4 +7,6 @@ export const PATHS = {
   downloadFile: "/download",
   hacking: "/main-2",
   signup: "/signup",
+  error: "/error",
+  loading: "/loading",
 };

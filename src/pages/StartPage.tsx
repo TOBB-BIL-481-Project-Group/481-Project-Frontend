@@ -17,19 +17,21 @@ const StartPage = () => {
     event.preventDefault(); // Prevent default form submission behavior
 
     // Collect form data
-
+    if(name === '' || email === '' || password === ''){
+      alert("Please fill all the blanks!");
+      return;
+    }
     try {
-      apisignup(name,email,password,"/");
-      navigate(PATHS.home);  // Log successful response
+      await apisignup(name,email,password,"/");
+      navigate(PATHS.loading);  // Log successful response
     } catch (error) {
-      console.error(error); // Log any errors
+      navigate(PATHS.error); // Log any errors
     }
   };
 
   return (
     <div className="home" style={{
       backgroundColor: "#3d424d",
-      color: "white",
       fontFamily: "Arial",
       display: "flex",
       textAlign: "center",
@@ -38,21 +40,30 @@ const StartPage = () => {
       height: "100vh",
       flexDirection: "column"
     }}>
-        <form onSubmit={handleSubmit} method='post'>
-          {/* Use htmlFor instead of 'for' attribute */}
-          <label htmlFor="name">Name:</label><br />
-          {/* Add 'id' attribute to input fields and associate them with 'htmlFor' */}
-          <input type="text" id="name" name="name" value={name} onChange={(e) => setName(e.target.value)}className="custom-input" /><br /><br />
-          <label htmlFor="email">Email:</label><br />
-          <input type="email" id="email" name="email" value={email} onChange={(e) => setEmail(e.target.value)} className="custom-input"/><br /><br />
-          <label htmlFor="password">Password:</label><br />
-          <input type="password" id="password" name="password" value={password} onChange={(e) => setPassword(e.target.value)}className="custom-input" /><br /><br />
-          <input type="submit" value="Submit" />
-          <br />
-          <Link to={PATHS.signup}>
-          <button >if you do not have account please sign in</button>
+      <div className="welcome-header" style={{
+        textAlign: "center",
+        marginBottom: "30px",
+        fontSize: "24px",
+        color: "white",
+      }}>
+        <h1>Welcome to the Test-Generator Site</h1>
+      </div>
+      <form onSubmit={handleSubmit} method='post' className="form-container">
+        <label htmlFor="name" className="form-label">Name:</label><br />
+        <input type="text" id="name" name="name" value={name} onChange={(e) => setName(e.target.value)} className="custom-input" /><br /><br />
+        
+        <label htmlFor="email" className="form-label">Email:</label><br />
+        <input type="email" id="email" name="email" value={email} onChange={(e) => setEmail(e.target.value)} className="custom-input"/><br /><br />
+        
+        <label htmlFor="password" className="form-label">Password:</label><br />
+        <input type="password" id="password" name="password" value={password} onChange={(e) => setPassword(e.target.value)} className="custom-input" /><br /><br />
+        
+        <input type="submit" value="Log In" className="submit-button" />
+        <br />
+        <Link to={PATHS.signup} className="signup-link">
+          <button className="signup-button">If you do not have an account, please sign up</button>
         </Link>
-        </form>
+    </form>
     </div>
   );
 };
