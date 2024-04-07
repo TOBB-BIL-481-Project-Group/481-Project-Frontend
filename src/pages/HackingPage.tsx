@@ -46,6 +46,12 @@ type ConstrainedVariableType = {
 };
 
 export function HackingPage() {
+  const[testCaseHide,setTestCaseHide] = useState(true);
+  const[defineIntegerHide,setDefineIntegerHide] = useState(true);
+  const[testCaseFormatHide, setTestCaseFormatHide] = useState(true);
+  const[constraintsHide,setConstraintsHide] = useState(true);
+  const[fileFormatHide, setFileFormatHide] = useState(true);
+
   const [variableLetters, setVariableLetters] = useState([] as string[]);
   const [variablesAllInOne, setVariablesAllInOne] = useState([] as any[]);
   const [savedInputs, setSavedInputs] = useState([] as any[]);
@@ -398,38 +404,53 @@ export function HackingPage() {
 
   return (
     <LayoutPage>
-      <Navbar bg="dark" data-bs-theme="dark" className='justify-content-center '>
-      <Navbar.Brand>
-        Test-Generator
-      </Navbar.Brand>
-        <Link to={PATHS.home} className='me-auto'>Home</Link>
-        <Link to={PATHS.aboutUs} className='me-auto'>About Us</Link>
-        <Link to={PATHS.tutorial} className='me-auto'>Tutorial</Link>
-        <NavItem className='me-auto text-secondary'>Go to Test-Generator</NavItem>
-      <Container>
-        <Navbar.Toggle />
-        <Navbar.Collapse className="justify-content-center">
-          <Navbar.Text>
-            Signed in as: <a href="#login">Muhammed Yılmaz</a>
-          </Navbar.Text>
-        </Navbar.Collapse>
-      </Container>
-    </Navbar>
-    <Navbar bg="gray" data-bs-theme="light" className='justify-content-center '>
-      <Navbar.Brand className="ml-1">
-        Hacking Page
-      </Navbar.Brand>
-        <Link to={PATHS.createFile} className='ml-4 text-danger'>In/Out Page</Link>
-        <NavItem className='ml-5 text-secondary'>Hacking Page</NavItem>
+      <Navbar
+        bg="dark"
+        data-bs-theme="dark"
+        className="justify-content-center "
+      >
+        <Navbar.Brand>Test-Generator</Navbar.Brand>
+        <Link to={PATHS.home} className="me-auto">
+          Home
+        </Link>
+        <Link to={PATHS.aboutUs} className="me-auto">
+          About Us
+        </Link>
+        <Link to={PATHS.tutorial} className="me-auto">
+          Tutorial
+        </Link>
+        <NavItem className="me-auto text-secondary">
+          Go to Test-Generator
+        </NavItem>
         <Container>
+          <Navbar.Toggle />
+          <Navbar.Collapse className="justify-content-center">
+            <Navbar.Text>
+              Signed in as: <a href="#login">Muhammed Yılmaz</a>
+            </Navbar.Text>
+          </Navbar.Collapse>
         </Container>
-    </Navbar>
+      </Navbar>
+      <Navbar
+        bg="gray"
+        data-bs-theme="light"
+        className="justify-content-center "
+      >
+        <Navbar.Brand className="ml-1">Hacking Page</Navbar.Brand>
+        <Link to={PATHS.createFile} className="ml-4 text-danger">
+          In/Out Page
+        </Link>
+        <NavItem className="ml-5 text-secondary">Hacking Page</NavItem>
+        <Container></Container>
+      </Navbar>
       <div className="flex flex-col flex-center justify-center items-center mb-4">
       
-        <div>
-          <p className="font-bold text-base font-poppins mt-12">Testcase</p>
+        <div className="container-hider">
+            <p className="font-bold text-base font-poppins mt-12 text-hider">
+              <button className= "button-hider" onClick={ () => testCaseHide ? setTestCaseHide(false) : setTestCaseHide(true)}>Testcase</button>
+            </p>
         </div>
-
+        { !testCaseHide &&
         <div className="flex flex-row mt-5 items-center justify-center">
           <div
             className="mr-8 items-center justify-center"
@@ -464,9 +485,14 @@ export function HackingPage() {
             />
           </div>
         </div>
-        <p className="font-bold text-base font-poppins mt-12">
-          Define Integer Variables
-        </p>
+        }
+        <div className="container-hider">
+          <p className="font-bold text-base font-poppins mt-12 text-hider">
+            <button className="button-hider" onClick={ () => defineIntegerHide ? setDefineIntegerHide(false) : setDefineIntegerHide(true)}>
+            Define Integer Variables</button>
+          </p>
+        </div>
+        { !defineIntegerHide &&
         <div className="flex flex-row mt-5 justify-center items-center">
           <div
             className="mr-8 items-center justify-center"
@@ -512,10 +538,15 @@ export function HackingPage() {
               <Icon color="#5302FF" iconName="plus" height="24" width="24" />
             </div>
           )}
+        </div>}
+
+        <div className="container-hider">
+          <p className="font-bold text-base font-poppins mt-12 text-hider">
+            <button className="button-hider" onClick={ () => testCaseFormatHide ? setTestCaseFormatHide(false) : setTestCaseFormatHide(true)}>
+            Testcase Format</button>
+          </p>
         </div>
-        <p className="font-poppins font-bold text-base mt-12">
-          Testcase Format
-        </p>
+         {!testCaseFormatHide && 
         <div className="flex flex-row mt-5 z-40">
           <div
             className="mr-8 items-center justify-center mt-1"
@@ -583,7 +614,9 @@ export function HackingPage() {
               </div>
             </Button>
           </div>
-        </div>
+        </div>}
+
+        {!testCaseFormatHide &&
         <div className="flex flex-row mt-4">
           <div className="w-fit">
             <Button
@@ -627,7 +660,7 @@ export function HackingPage() {
               </div>
             </Button>
           </div>
-        </div>
+        </div>}
         {isIntegerPopUpOpen && (
           <div className="mt-4 z-50">
             <IntegerPopUp
@@ -804,9 +837,13 @@ export function HackingPage() {
             />
           </div>
         )}
-        <p className="font-poppins font-bold text-base mt-12">
-          Testcase Constraints
-        </p>
+        <div className="container-hider">
+          <p className="font-bold text-base font-poppins mt-12 text-hider">
+            <button className="button-hider" onClick={ () => constraintsHide ? setConstraintsHide(false) : setConstraintsHide(true)}>
+            Testcase Constraints</button>
+          </p>
+        </div>
+        {!constraintsHide &&
         <div className="flex flex-col mt-3 justify-center items-center">
           {constrainedVariables.length > 0 &&
             constrainedVariables.map((e, index) => (
@@ -840,7 +877,8 @@ export function HackingPage() {
                 </div>
               </div>
             ))}
-        </div>
+        </div>}
+        {!constraintsHide &&
         <div className="flex flex-row mt-4 justify-center">
           <div
             className="mr-8 items-center justify-center mt-1"
@@ -901,7 +939,7 @@ export function HackingPage() {
               </div>
             </Button>
           </div>
-        </div>
+        </div>}
         {isTutorialPopUpOpen && (
           <div className="absolute z-50 top-20 left-12">
             <InformationPopUp
@@ -910,7 +948,13 @@ export function HackingPage() {
             />
           </div>
         )}
-        <p className="font-poppins font-bold text-base mt-12">File Format</p>
+        <div className="container-hider">
+          <p className="font-bold text-base font-poppins mt-12 text-hider">
+            <button className="button-hider" onClick={ () => fileFormatHide ? setFileFormatHide(false) : setFileFormatHide(true)}>
+            File Format</button>
+          </p>
+        </div>
+        { !fileFormatHide &&
         <div className="flex flex-row mt-5 justify-center">
           <div
             className="mr-8 items-center justify-center mt-1"
@@ -969,21 +1013,23 @@ export function HackingPage() {
               }}
             />
           </div>
-        </div>
+        </div>}
+        { !fileFormatHide &&
         <div className="w-fit mt-12">
           <Input
             type="file"
             accept=".cpp"
             onChange={(e) => setCodeFileFunc(e.target.files)}
           />
-        </div>
+        </div>}
+        { !fileFormatHide &&
         <div className="w-fit mt-12">
           <Input
             type="file"
             accept=".cpp"
             onChange={(e) => setCodeFileFunc(e.target.files)}
           />
-        </div>
+        </div>}
         <div className="flex flex-row mt-12">
           <div className="w-fit">
             <Button
