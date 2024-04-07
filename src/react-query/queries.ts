@@ -20,6 +20,17 @@ export const apiUploadCode = (outputData: outputCodeType) => {
   });
 };
 
+export const apiHackingFile = (outputData: outputCodeType) => {
+  return axios_instance({
+    url: "/hacking_file/" + outputData.userSpecificId.toString(),
+    method: "post",
+    data: outputData.codeFile,
+    headers: {
+      "Content-Type": "multipart/form-data",
+    },
+  });
+};
+
 export const apiGetFile = (folderName: string) => {
   return axios_instance({
     url: `/downloadFile/${folderName}`,
