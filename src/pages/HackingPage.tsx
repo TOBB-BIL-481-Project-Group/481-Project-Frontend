@@ -1048,7 +1048,7 @@ export function HackingPage() {
           </div>
         </div>
         <div
-          className="fixed top-0 right-0 w-1/4 h-full"
+          className="fixed top-1/6 right-0 w-1/4 h-2/3"
           style={{ width: sidebarVisible ? "20%" : "1%" }}
           onDoubleClick={() => {
             setSidebarVisibility(!sidebarVisible);

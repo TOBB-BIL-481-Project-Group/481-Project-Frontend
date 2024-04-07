@@ -39,7 +39,7 @@ export function FormatSidebar({ sidebarString }: FormatSidebarProps) {
               )}
             </div>
             <p
-              className={`font-poppins font-bold text-xs ml-8 whitespace-pre pr-2 ${
+              className={`font-poppins font-bold text-xs ml-3 whitespace-pre pr-2 ${
                 index > firstLineIndex ? "text-white" : "text-blue"
               }`}
             >
