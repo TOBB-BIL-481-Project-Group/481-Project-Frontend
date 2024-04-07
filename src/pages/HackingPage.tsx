@@ -16,8 +16,8 @@ import { FormatSidebar } from "../ui/FormatSidebar";
 import { getSidebarInputs } from "../utils/getSidebarInputs";
 import { convertTypeToContentType } from "../utils/convertTypeToContentType";
 import {
-  useCodeUploadMutation,
   useCreateFileMutation,
+  useHackingFileMutation,
 } from "../react-query/hooks";
 import { fileType, numberingType } from "../react-query/types";
 import { useNavigate } from "react-router-dom";
@@ -36,9 +36,9 @@ import {
 } from "../recoil-store/LastInputStoreHooks";
 import { InformationPopUp, InformationType } from "../ui/InformationPopUp";
 import { HiInformationCircle } from "react-icons/hi";
-import Container from 'react-bootstrap/Container';
-import Navbar from 'react-bootstrap/Navbar';
-import { Link } from 'react-router-dom';
+import Container from "react-bootstrap/Container";
+import Navbar from "react-bootstrap/Navbar";
+import { Link } from "react-router-dom";
 import { NavItem } from "react-bootstrap";
 type ConstrainedVariableType = {
   symbol: string;
@@ -46,12 +46,6 @@ type ConstrainedVariableType = {
 };
 
 export function HackingPage() {
-  const[testCaseHide,setTestCaseHide] = useState(true);
-  const[defineIntegerHide,setDefineIntegerHide] = useState(true);
-  const[testCaseFormatHide, setTestCaseFormatHide] = useState(true);
-  const[constraintsHide,setConstraintsHide] = useState(true);
-  const[fileFormatHide, setFileFormatHide] = useState(true);
-
   const [variableLetters, setVariableLetters] = useState([] as string[]);
   const [variablesAllInOne, setVariablesAllInOne] = useState([] as any[]);
   const [savedInputs, setSavedInputs] = useState([] as any[]);
@@ -79,6 +73,7 @@ export function HackingPage() {
     "testcaseInterval" as InformationType
   );
   const [codeFile, setCodeFile] = useState<File | null>(null);
+  const [codeFile2, setCodeFile2] = useState<File | null>(null);
 
   const openTutorialPopUp = (e: InformationType) => {
     setIsTutorialPopUpOpen(true);
@@ -101,7 +96,7 @@ export function HackingPage() {
         sidebarString: sidebarString,
         constrainedVariables: constrainedVariables,
       });
-      uploadCodeFile(res.data);
+      uploadTwoCodeFiles(res.data);
     },
     onError: (error) => {
       if (error) {
@@ -116,7 +111,7 @@ export function HackingPage() {
     },
   });
 
-  const codeUploadMutation = useCodeUploadMutation({
+  /*const codeUploadMutation = useCodeUploadMutation({
     onSuccess: (res) => {
       notify.success("Code is uploaded");
       navigate(PATHS.downloadFile, { state: { folderName: res.data } });
@@ -132,8 +127,26 @@ export function HackingPage() {
         }
       }
     },
+  });*/
+  const hackingFileMutation = useHackingFileMutation({
+    onSuccess: (res) => {
+      //BURAYA IF ELSE YAZ
+      notify.success("Code is uploaded");
+      navigate(PATHS.downloadFile, { state: { folderName: res.data } });
+    },
+    onError: (error) => {
+      if (error) {
+        console.log(error.response);
+        if (error.response === undefined) {
+          notify.error(error.message);
+        } else {
+          notify.error(error.response.data);
+          console.log("Error: ", error.response.data);
+        }
+      }
+    },
   });
-
+  /*
   const uploadCodeFile = (userSpecificId: number) => {
     if (codeFile === null) {
       notify.error("Output code is not given");
@@ -142,6 +155,19 @@ export function HackingPage() {
     const formData = new FormData();
     formData.append("codeFile", codeFile);
     codeUploadMutation.mutate({
+      userSpecificId: userSpecificId,
+      codeFile: formData,
+    });
+  };*/
+  const uploadTwoCodeFiles = (userSpecificId: number) => {
+    if (codeFile === null || codeFile2 == null) {
+      notify.error("At least one of the codes is not given");
+      return;
+    }
+    const formData = new FormData();
+    formData.append("codeFile", codeFile);
+    formData.append("codeFile2", codeFile2);
+    hackingFileMutation.mutate({
       userSpecificId: userSpecificId,
       codeFile: formData,
     });
@@ -391,14 +417,31 @@ export function HackingPage() {
     return e.substring(dotIndex + 1, e.length);
   };
   const setCodeFileFunc = (e: FileList | null) => {
-    if (e != null && e.length >= 1 && findExtension(e[0].name) === "cpp") {
+    if (
+      e != null &&
+      e.length >= 1 &&
+      (findExtension(e[0].name) === "cpp" ||
+        findExtension(e[0].name) === "java")
+    ) {
       setCodeFile(e[0]);
     } else {
       notify.error("Problem in Frontend of Uploading File");
     }
   };
+  const setCodeFileFunc2 = (e: FileList | null) => {
+    if (
+      e != null &&
+      e.length >= 1 &&
+      (findExtension(e[0].name) === "cpp" ||
+        findExtension(e[0].name) === "java")
+    ) {
+      setCodeFile2(e[0]);
+    } else {
+      notify.error("Problem in Frontend of Uploading File");
+    }
+  };
 
-  if (createFileMutation.isLoading || codeUploadMutation.isLoading) {
+  if (createFileMutation.isLoading || hackingFileMutation.isLoading) {
     return <Loader />;
   }
 
@@ -444,13 +487,10 @@ export function HackingPage() {
         <Container></Container>
       </Navbar>
       <div className="flex flex-col flex-center justify-center items-center mb-4">
-      
-        <div className="container-hider">
-            <p className="font-bold text-base font-poppins mt-12 text-hider">
-              <button className= "button-hider" onClick={ () => testCaseHide ? setTestCaseHide(false) : setTestCaseHide(true)}>Testcase</button>
-            </p>
+        <div>
+          <p className="font-bold text-base font-poppins mt-12">Testcase</p>
         </div>
-        { !testCaseHide &&
+
         <div className="flex flex-row mt-5 items-center justify-center">
           <div
             className="mr-8 items-center justify-center"
@@ -485,14 +525,9 @@ export function HackingPage() {
             />
           </div>
         </div>
-        }
-        <div className="container-hider">
-          <p className="font-bold text-base font-poppins mt-12 text-hider">
-            <button className="button-hider" onClick={ () => defineIntegerHide ? setDefineIntegerHide(false) : setDefineIntegerHide(true)}>
-            Define Integer Variables</button>
-          </p>
-        </div>
-        { !defineIntegerHide &&
+        <p className="font-bold text-base font-poppins mt-12">
+          Define Integer Variables
+        </p>
         <div className="flex flex-row mt-5 justify-center items-center">
           <div
             className="mr-8 items-center justify-center"
@@ -538,15 +573,10 @@ export function HackingPage() {
               <Icon color="#5302FF" iconName="plus" height="24" width="24" />
             </div>
           )}
-        </div>}
-
-        <div className="container-hider">
-          <p className="font-bold text-base font-poppins mt-12 text-hider">
-            <button className="button-hider" onClick={ () => testCaseFormatHide ? setTestCaseFormatHide(false) : setTestCaseFormatHide(true)}>
-            Testcase Format</button>
-          </p>
         </div>
-         {!testCaseFormatHide && 
+        <p className="font-poppins font-bold text-base mt-12">
+          Testcase Format
+        </p>
         <div className="flex flex-row mt-5 z-40">
           <div
             className="mr-8 items-center justify-center mt-1"
@@ -614,9 +644,7 @@ export function HackingPage() {
               </div>
             </Button>
           </div>
-        </div>}
-
-        {!testCaseFormatHide &&
+        </div>
         <div className="flex flex-row mt-4">
           <div className="w-fit">
             <Button
@@ -628,8 +656,8 @@ export function HackingPage() {
               }}
             >
               <div className="flex flex-row justify-center items-center">
-              Finish Line
-                </div>
+                Finish Line
+              </div>
             </Button>
           </div>
           <div className="w-fit ml-3">
@@ -660,7 +688,7 @@ export function HackingPage() {
               </div>
             </Button>
           </div>
-        </div>}
+        </div>
         {isIntegerPopUpOpen && (
           <div className="mt-4 z-50">
             <IntegerPopUp
@@ -837,13 +865,9 @@ export function HackingPage() {
             />
           </div>
         )}
-        <div className="container-hider">
-          <p className="font-bold text-base font-poppins mt-12 text-hider">
-            <button className="button-hider" onClick={ () => constraintsHide ? setConstraintsHide(false) : setConstraintsHide(true)}>
-            Testcase Constraints</button>
-          </p>
-        </div>
-        {!constraintsHide &&
+        <p className="font-poppins font-bold text-base mt-12">
+          Testcase Constraints
+        </p>
         <div className="flex flex-col mt-3 justify-center items-center">
           {constrainedVariables.length > 0 &&
             constrainedVariables.map((e, index) => (
@@ -877,8 +901,7 @@ export function HackingPage() {
                 </div>
               </div>
             ))}
-        </div>}
-        {!constraintsHide &&
+        </div>
         <div className="flex flex-row mt-4 justify-center">
           <div
             className="mr-8 items-center justify-center mt-1"
@@ -939,7 +962,7 @@ export function HackingPage() {
               </div>
             </Button>
           </div>
-        </div>}
+        </div>
         {isTutorialPopUpOpen && (
           <div className="absolute z-50 top-20 left-12">
             <InformationPopUp
@@ -948,13 +971,7 @@ export function HackingPage() {
             />
           </div>
         )}
-        <div className="container-hider">
-          <p className="font-bold text-base font-poppins mt-12 text-hider">
-            <button className="button-hider" onClick={ () => fileFormatHide ? setFileFormatHide(false) : setFileFormatHide(true)}>
-            File Format</button>
-          </p>
-        </div>
-        { !fileFormatHide &&
+        <p className="font-poppins font-bold text-base mt-12">File Format</p>
         <div className="flex flex-row mt-5 justify-center">
           <div
             className="mr-8 items-center justify-center mt-1"
@@ -1013,23 +1030,21 @@ export function HackingPage() {
               }}
             />
           </div>
-        </div>}
-        { !fileFormatHide &&
+        </div>
         <div className="w-fit mt-12">
           <Input
             type="file"
-            accept=".cpp"
+            accept=".cpp, .java"
             onChange={(e) => setCodeFileFunc(e.target.files)}
           />
-        </div>}
-        { !fileFormatHide &&
+        </div>
         <div className="w-fit mt-12">
           <Input
             type="file"
-            accept=".cpp"
-            onChange={(e) => setCodeFileFunc(e.target.files)}
+            accept=".cpp, .java"
+            onChange={(e) => setCodeFileFunc2(e.target.files)}
           />
-        </div>}
+        </div>
         <div className="flex flex-row mt-12">
           <div className="w-fit">
             <Button
@@ -1048,7 +1063,7 @@ export function HackingPage() {
           </div>
         </div>
         <div
-          className="fixed top-1/6 right-0 w-1/4 h-2/3"
+          className="fixed top-0 right-0 w-1/4 h-full"
           style={{ width: sidebarVisible ? "20%" : "1%" }}
           onDoubleClick={() => {
             setSidebarVisibility(!sidebarVisible);

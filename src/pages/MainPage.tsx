@@ -36,9 +36,9 @@ import {
 } from "../recoil-store/LastInputStoreHooks";
 import { InformationPopUp, InformationType } from "../ui/InformationPopUp";
 import { HiInformationCircle } from "react-icons/hi";
-import Container from 'react-bootstrap/Container';
-import Navbar from 'react-bootstrap/Navbar';
-import { Link } from 'react-router-dom';
+import Container from "react-bootstrap/Container";
+import Navbar from "react-bootstrap/Navbar";
+import { Link } from "react-router-dom";
 import { NavItem } from "react-bootstrap";
 type ConstrainedVariableType = {
   symbol: string;
@@ -46,12 +46,6 @@ type ConstrainedVariableType = {
 };
 
 export function MainPage() {
-  const[testCaseHide,setTestCaseHide] = useState(true);
-  const[defineIntegerHide,setDefineIntegerHide] = useState(true);
-  const[testCaseFormatHide, setTestCaseFormatHide] = useState(true);
-  const[constraintsHide,setConstraintsHide] = useState(true);
-  const[fileFormatHide, setFileFormatHide] = useState(true);
-
   const [variableLetters, setVariableLetters] = useState([] as string[]);
   const [variablesAllInOne, setVariablesAllInOne] = useState([] as any[]);
   const [savedInputs, setSavedInputs] = useState([] as any[]);
@@ -391,7 +385,12 @@ export function MainPage() {
     return e.substring(dotIndex + 1, e.length);
   };
   const setCodeFileFunc = (e: FileList | null) => {
-    if (e != null && e.length >= 1 && findExtension(e[0].name) === "cpp") {
+    if (
+      e != null &&
+      e.length >= 1 &&
+      (findExtension(e[0].name) === "cpp" ||
+        findExtension(e[0].name) === "java")
+    ) {
       setCodeFile(e[0]);
     } else {
       notify.error("Problem in Frontend of Uploading File");
@@ -404,40 +403,50 @@ export function MainPage() {
 
   return (
     <LayoutPage>
-      <Navbar bg="dark" data-bs-theme="dark" className='justify-content-center '>
-      <Navbar.Brand>
-        Test-Generator
-      </Navbar.Brand>
-        <Link to={PATHS.home} className='me-auto'>Home</Link>
-        <Link to={PATHS.aboutUs} className='me-auto'>About Us</Link>
-        <Link to={PATHS.tutorial} className='me-auto'>Tutorial</Link>
-        <NavItem className='me-auto text-secondary'>Go to Test-Generator</NavItem>
-      <Container>
-        <Navbar.Toggle />
-        <Navbar.Collapse className="justify-content-center">
-          <Navbar.Text>
-            Signed in as: <a href="#login">Muhammed Yılmaz</a>
-          </Navbar.Text>
-        </Navbar.Collapse>
-      </Container>
-    </Navbar>
-    <Navbar bg="gray" data-bs-theme="light" className='justify-content-center '>
-      <Navbar.Brand className="ml-1">
-        In/Out Page
-      </Navbar.Brand>
-        <NavItem className='ml-4 text-secondary'>In/Out Page</NavItem>
-        <Link to={PATHS.hacking} className='ml-5 text-danger'>Hacking Page</Link>
+      <Navbar
+        bg="dark"
+        data-bs-theme="dark"
+        className="justify-content-center "
+      >
+        <Navbar.Brand>Test-Generator</Navbar.Brand>
+        <Link to={PATHS.home} className="me-auto">
+          Home
+        </Link>
+        <Link to={PATHS.aboutUs} className="me-auto">
+          About Us
+        </Link>
+        <Link to={PATHS.tutorial} className="me-auto">
+          Tutorial
+        </Link>
+        <NavItem className="me-auto text-secondary">
+          Go to Test-Generator
+        </NavItem>
         <Container>
+          <Navbar.Toggle />
+          <Navbar.Collapse className="justify-content-center">
+            <Navbar.Text>
+              Signed in as: <a href="#login">Muhammed Yılmaz</a>
+            </Navbar.Text>
+          </Navbar.Collapse>
         </Container>
-    </Navbar>
+      </Navbar>
+      <Navbar
+        bg="gray"
+        data-bs-theme="light"
+        className="justify-content-center "
+      >
+        <Navbar.Brand className="ml-1">In/Out Page</Navbar.Brand>
+        <NavItem className="ml-4 text-secondary">In/Out Page</NavItem>
+        <Link to={PATHS.hacking} className="ml-5 text-danger">
+          Hacking Page
+        </Link>
+        <Container></Container>
+      </Navbar>
       <div className="flex flex-col flex-center justify-center items-center mb-4">
-      
-        <div className="container-hider">
-            <p className="font-bold text-base font-poppins mt-12 text-hider">
-              <button className= "button-hider" onClick={ () => testCaseHide ? setTestCaseHide(false) : setTestCaseHide(true)}>Testcase</button>
-            </p>
+        <div>
+          <p className="font-bold text-base font-poppins mt-12">Testcase</p>
         </div>
-        { !testCaseHide &&
+
         <div className="flex flex-row mt-5 items-center justify-center">
           <div
             className="mr-8 items-center justify-center"
@@ -472,14 +481,9 @@ export function MainPage() {
             />
           </div>
         </div>
-        }
-        <div className="container-hider">
-          <p className="font-bold text-base font-poppins mt-12 text-hider">
-            <button className="button-hider" onClick={ () => defineIntegerHide ? setDefineIntegerHide(false) : setDefineIntegerHide(true)}>
-            Define Integer Variables</button>
-          </p>
-        </div>
-        { !defineIntegerHide &&
+        <p className="font-bold text-base font-poppins mt-12">
+          Define Integer Variables
+        </p>
         <div className="flex flex-row mt-5 justify-center items-center">
           <div
             className="mr-8 items-center justify-center"
@@ -525,15 +529,10 @@ export function MainPage() {
               <Icon color="#5302FF" iconName="plus" height="24" width="24" />
             </div>
           )}
-        </div>}
-
-        <div className="container-hider">
-          <p className="font-bold text-base font-poppins mt-12 text-hider">
-            <button className="button-hider" onClick={ () => testCaseFormatHide ? setTestCaseFormatHide(false) : setTestCaseFormatHide(true)}>
-            Testcase Format</button>
-          </p>
         </div>
-         {!testCaseFormatHide && 
+        <p className="font-poppins font-bold text-base mt-12">
+          Testcase Format
+        </p>
         <div className="flex flex-row mt-5 z-40">
           <div
             className="mr-8 items-center justify-center mt-1"
@@ -601,9 +600,7 @@ export function MainPage() {
               </div>
             </Button>
           </div>
-        </div>}
-
-        {!testCaseFormatHide &&
+        </div>
         <div className="flex flex-row mt-4">
           <div className="w-fit">
             <Button
@@ -615,8 +612,8 @@ export function MainPage() {
               }}
             >
               <div className="flex flex-row justify-center items-center">
-              Finish Line
-                </div>
+                Finish Line
+              </div>
             </Button>
           </div>
           <div className="w-fit ml-3">
@@ -647,7 +644,7 @@ export function MainPage() {
               </div>
             </Button>
           </div>
-        </div>}
+        </div>
         {isIntegerPopUpOpen && (
           <div className="mt-4 z-50">
             <IntegerPopUp
@@ -824,13 +821,9 @@ export function MainPage() {
             />
           </div>
         )}
-        <div className="container-hider">
-          <p className="font-bold text-base font-poppins mt-12 text-hider">
-            <button className="button-hider" onClick={ () => constraintsHide ? setConstraintsHide(false) : setConstraintsHide(true)}>
-            Testcase Constraints</button>
-          </p>
-        </div>
-        {!constraintsHide &&
+        <p className="font-poppins font-bold text-base mt-12">
+          Testcase Constraints
+        </p>
         <div className="flex flex-col mt-3 justify-center items-center">
           {constrainedVariables.length > 0 &&
             constrainedVariables.map((e, index) => (
@@ -864,8 +857,7 @@ export function MainPage() {
                 </div>
               </div>
             ))}
-        </div>}
-        {!constraintsHide &&
+        </div>
         <div className="flex flex-row mt-4 justify-center">
           <div
             className="mr-8 items-center justify-center mt-1"
@@ -926,7 +918,7 @@ export function MainPage() {
               </div>
             </Button>
           </div>
-        </div>}
+        </div>
         {isTutorialPopUpOpen && (
           <div className="absolute z-50 top-20 left-12">
             <InformationPopUp
@@ -935,13 +927,7 @@ export function MainPage() {
             />
           </div>
         )}
-        <div className="container-hider">
-          <p className="font-bold text-base font-poppins mt-12 text-hider">
-            <button className="button-hider" onClick={ () => fileFormatHide ? setFileFormatHide(false) : setFileFormatHide(true)}>
-            File Format</button>
-          </p>
-        </div>
-        {!fileFormatHide &&
+        <p className="font-poppins font-bold text-base mt-12">File Format</p>
         <div className="flex flex-row mt-5 justify-center">
           <div
             className="mr-8 items-center justify-center mt-1"
@@ -1000,15 +986,14 @@ export function MainPage() {
               }}
             />
           </div>
-        </div>}
-        {!fileFormatHide &&
+        </div>
         <div className="w-fit mt-12">
           <Input
             type="file"
-            accept=".cpp"
+            accept=".cpp, .java"
             onChange={(e) => setCodeFileFunc(e.target.files)}
           />
-        </div>}
+        </div>
         <div className="flex flex-row mt-12">
           <div className="w-fit">
             <Button
@@ -1027,7 +1012,7 @@ export function MainPage() {
           </div>
         </div>
         <div
-          className="fixed top-1/6 right-0 w-1/4 h-2/3"
+          className="fixed top-0 right-0 w-1/4 h-full"
           style={{ width: sidebarVisible ? "20%" : "1%" }}
           onDoubleClick={() => {
             setSidebarVisibility(!sidebarVisible);
