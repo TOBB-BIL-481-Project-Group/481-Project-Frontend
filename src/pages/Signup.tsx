@@ -1,17 +1,15 @@
-import { useState } from 'react'; // Import React and useState
+import React, { useState } from 'react'; // Import React and useState
 import { PATHS } from "../consts/paths";
-import { Link} from 'react-router-dom'; // Assuming you're using React Router
 import { apisignup } from '../react-query/queries'; // Importing the apisignup function
 import { FormEvent } from 'react'; // Import FormEvent type from react
 import { useNavigate } from "react-router-dom";
 
-const StartPage = () => {
+const Signup = () => {
   // State variables to store form data
   const [name, setName] = useState('');
   const [email, setEmail] = useState('');
   const [password, setPassword] = useState('');
   const navigate = useNavigate();
-
   // Function to handle form submission
   const handleSubmit = async (event: FormEvent<HTMLFormElement>) => {
     event.preventDefault(); // Prevent default form submission behavior
@@ -19,10 +17,11 @@ const StartPage = () => {
     // Collect form data
 
     try {
-      apisignup(name,email,password,"/");
-      navigate(PATHS.home);  // Log successful response
+      // Call signup function passing userData
+       apisignup(name,email,password,"/signup");
+       navigate(PATHS.start)// Log successful response
     } catch (error) {
-      console.error(error); // Log any errors
+      // Log any errors
     }
   };
 
@@ -49,12 +48,9 @@ const StartPage = () => {
           <input type="password" id="password" name="password" value={password} onChange={(e) => setPassword(e.target.value)}className="custom-input" /><br /><br />
           <input type="submit" value="Submit" />
           <br />
-          <Link to={PATHS.signup}>
-          <button >if you do not have account please sign in</button>
-        </Link>
         </form>
     </div>
   );
 };
 
-export default StartPage;
+export default Signup;

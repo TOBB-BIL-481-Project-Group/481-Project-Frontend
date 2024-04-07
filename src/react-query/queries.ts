@@ -34,3 +34,15 @@ export const apiDeleteFile = (folderName: string) => {
     method: "delete",
   });
 };
+
+export const apisignup = (name: string,email: string,password:string,urls: string) => {
+  return axios_instance({
+    url: urls,
+    method: "post",
+    data: {
+      name: name,
+      email: email,
+      password: password,
+    }
+  });
+};
