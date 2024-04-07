@@ -417,14 +417,24 @@ export function HackingPage() {
     return e.substring(dotIndex + 1, e.length);
   };
   const setCodeFileFunc = (e: FileList | null) => {
-    if (e != null && e.length >= 1 && findExtension(e[0].name) === "cpp") {
+    if (
+      e != null &&
+      e.length >= 1 &&
+      (findExtension(e[0].name) === "cpp" ||
+        findExtension(e[0].name) === "java")
+    ) {
       setCodeFile(e[0]);
     } else {
       notify.error("Problem in Frontend of Uploading File");
     }
   };
   const setCodeFileFunc2 = (e: FileList | null) => {
-    if (e != null && e.length >= 1 && findExtension(e[0].name) === "cpp") {
+    if (
+      e != null &&
+      e.length >= 1 &&
+      (findExtension(e[0].name) === "cpp" ||
+        findExtension(e[0].name) === "java")
+    ) {
       setCodeFile2(e[0]);
     } else {
       notify.error("Problem in Frontend of Uploading File");
@@ -1024,14 +1034,14 @@ export function HackingPage() {
         <div className="w-fit mt-12">
           <Input
             type="file"
-            accept=".cpp"
+            accept=".cpp, .java"
             onChange={(e) => setCodeFileFunc(e.target.files)}
           />
         </div>
         <div className="w-fit mt-12">
           <Input
             type="file"
-            accept=".cpp"
+            accept=".cpp, .java"
             onChange={(e) => setCodeFileFunc2(e.target.files)}
           />
         </div>

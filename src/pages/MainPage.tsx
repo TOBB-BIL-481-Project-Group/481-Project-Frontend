@@ -36,9 +36,9 @@ import {
 } from "../recoil-store/LastInputStoreHooks";
 import { InformationPopUp, InformationType } from "../ui/InformationPopUp";
 import { HiInformationCircle } from "react-icons/hi";
-import Container from 'react-bootstrap/Container';
-import Navbar from 'react-bootstrap/Navbar';
-import { Link } from 'react-router-dom';
+import Container from "react-bootstrap/Container";
+import Navbar from "react-bootstrap/Navbar";
+import { Link } from "react-router-dom";
 import { NavItem } from "react-bootstrap";
 type ConstrainedVariableType = {
   symbol: string;
@@ -385,7 +385,12 @@ export function MainPage() {
     return e.substring(dotIndex + 1, e.length);
   };
   const setCodeFileFunc = (e: FileList | null) => {
-    if (e != null && e.length >= 1 && findExtension(e[0].name) === "cpp") {
+    if (
+      e != null &&
+      e.length >= 1 &&
+      (findExtension(e[0].name) === "cpp" ||
+        findExtension(e[0].name) === "java")
+    ) {
       setCodeFile(e[0]);
     } else {
       notify.error("Problem in Frontend of Uploading File");
@@ -398,34 +403,46 @@ export function MainPage() {
 
   return (
     <LayoutPage>
-      <Navbar bg="dark" data-bs-theme="dark" className='justify-content-center '>
-      <Navbar.Brand>
-        Test-Generator
-      </Navbar.Brand>
-        <Link to={PATHS.home} className='me-auto'>Home</Link>
-        <Link to={PATHS.aboutUs} className='me-auto'>About Us</Link>
-        <Link to={PATHS.tutorial} className='me-auto'>Tutorial</Link>
-        <NavItem className='me-auto text-secondary'>Go to Test-Generator</NavItem>
-      <Container>
-        <Navbar.Toggle />
-        <Navbar.Collapse className="justify-content-center">
-          <Navbar.Text>
-            Signed in as: <a href="#login">Muhammed Yılmaz</a>
-          </Navbar.Text>
-        </Navbar.Collapse>
-      </Container>
-    </Navbar>
-    <Navbar bg="gray" data-bs-theme="light" className='justify-content-center '>
-      <Navbar.Brand className="ml-1">
-        In/Out Page
-      </Navbar.Brand>
-        <NavItem className='ml-4 text-secondary'>In/Out Page</NavItem>
-        <Link to={PATHS.hacking} className='ml-5 text-danger'>Hacking Page</Link>
+      <Navbar
+        bg="dark"
+        data-bs-theme="dark"
+        className="justify-content-center "
+      >
+        <Navbar.Brand>Test-Generator</Navbar.Brand>
+        <Link to={PATHS.home} className="me-auto">
+          Home
+        </Link>
+        <Link to={PATHS.aboutUs} className="me-auto">
+          About Us
+        </Link>
+        <Link to={PATHS.tutorial} className="me-auto">
+          Tutorial
+        </Link>
+        <NavItem className="me-auto text-secondary">
+          Go to Test-Generator
+        </NavItem>
         <Container>
+          <Navbar.Toggle />
+          <Navbar.Collapse className="justify-content-center">
+            <Navbar.Text>
+              Signed in as: <a href="#login">Muhammed Yılmaz</a>
+            </Navbar.Text>
+          </Navbar.Collapse>
         </Container>
-    </Navbar>
+      </Navbar>
+      <Navbar
+        bg="gray"
+        data-bs-theme="light"
+        className="justify-content-center "
+      >
+        <Navbar.Brand className="ml-1">In/Out Page</Navbar.Brand>
+        <NavItem className="ml-4 text-secondary">In/Out Page</NavItem>
+        <Link to={PATHS.hacking} className="ml-5 text-danger">
+          Hacking Page
+        </Link>
+        <Container></Container>
+      </Navbar>
       <div className="flex flex-col flex-center justify-center items-center mb-4">
-      
         <div>
           <p className="font-bold text-base font-poppins mt-12">Testcase</p>
         </div>
@@ -595,8 +612,8 @@ export function MainPage() {
               }}
             >
               <div className="flex flex-row justify-center items-center">
-              Finish Line
-                </div>
+                Finish Line
+              </div>
             </Button>
           </div>
           <div className="w-fit ml-3">
@@ -973,7 +990,7 @@ export function MainPage() {
         <div className="w-fit mt-12">
           <Input
             type="file"
-            accept=".cpp"
+            accept=".cpp, .java"
             onChange={(e) => setCodeFileFunc(e.target.files)}
           />
         </div>
