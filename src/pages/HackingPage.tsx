@@ -36,9 +36,9 @@ import {
 } from "../recoil-store/LastInputStoreHooks";
 import { InformationPopUp, InformationType } from "../ui/InformationPopUp";
 import { HiInformationCircle } from "react-icons/hi";
-import Container from 'react-bootstrap/Container';
-import Navbar from 'react-bootstrap/Navbar';
-import { Link } from 'react-router-dom';
+import Container from "react-bootstrap/Container";
+import Navbar from "react-bootstrap/Navbar";
+import { Link } from "react-router-dom";
 import { NavItem } from "react-bootstrap";
 type ConstrainedVariableType = {
   symbol: string;
@@ -46,11 +46,11 @@ type ConstrainedVariableType = {
 };
 
 export function HackingPage() {
-  const[testCaseHide,setTestCaseHide] = useState(true);
-  const[defineIntegerHide,setDefineIntegerHide] = useState(true);
-  const[testCaseFormatHide, setTestCaseFormatHide] = useState(true);
-  const[constraintsHide,setConstraintsHide] = useState(true);
-  const[fileFormatHide, setFileFormatHide] = useState(true);
+  const [testCaseHide, setTestCaseHide] = useState(true);
+  const [defineIntegerHide, setDefineIntegerHide] = useState(true);
+  const [testCaseFormatHide, setTestCaseFormatHide] = useState(true);
+  const [constraintsHide, setConstraintsHide] = useState(true);
+  const [fileFormatHide, setFileFormatHide] = useState(true);
 
   const [variableLetters, setVariableLetters] = useState([] as string[]);
   const [variablesAllInOne, setVariablesAllInOne] = useState([] as any[]);
@@ -444,223 +444,248 @@ export function HackingPage() {
         <Container></Container>
       </Navbar>
       <div className="flex flex-col flex-center justify-center items-center mb-4">
-      
-        <div className="container-hider">
-            <p className="font-bold text-base font-poppins mt-12 text-hider">
-              <button className= "button-hider" onClick={ () => testCaseHide ? setTestCaseHide(false) : setTestCaseHide(true)}>Testcase</button>
-            </p>
-        </div>
-        { !testCaseHide &&
-        <div className="flex flex-row mt-5 items-center justify-center">
-          <div
-            className="mr-8 items-center justify-center"
-            onClick={() => openTutorialPopUp("testcaseInterval")}
-          >
-            <HiInformationCircle
-              className="text-2xl text-center"
-              color="#5302FF"
-            />
-          </div>
-          <div className="w-20 ml-3">
-            <Input
-              isTextCentered
-              value={testcaseLowerBound}
-              onChange={(e) => setTestcaseLowerBound(e.target.value)}
-            />
-          </div>
-          <div className="ml-3">
-            <Icon color="#0085FF" width="12" height="12" iconName="leq" />
-          </div>
-          <div className="w-9 ml-3">
-            <Input disabled isTextCentered value={"t"} />
-          </div>
-          <div className="ml-3">
-            <Icon color="#0085FF" width="12" height="12" iconName="leq" />
-          </div>
-          <div className="w-20 ml-3">
-            <Input
-              isTextCentered
-              value={testcaseUpperBound}
-              onChange={(e) => setTestcaseUpperBound(e.target.value)}
-            />
-          </div>
-        </div>
-        }
         <div className="container-hider">
           <p className="font-bold text-base font-poppins mt-12 text-hider">
-            <button className="button-hider" onClick={ () => defineIntegerHide ? setDefineIntegerHide(false) : setDefineIntegerHide(true)}>
-            Define Integer Variables</button>
+            <button
+              className="button-hider"
+              onClick={() =>
+                testCaseHide ? setTestCaseHide(false) : setTestCaseHide(true)
+              }
+            >
+              Testcase
+            </button>
           </p>
         </div>
-        { !defineIntegerHide &&
-        <div className="flex flex-row mt-5 justify-center items-center">
-          <div
-            className="mr-8 items-center justify-center"
-            onClick={() => openTutorialPopUp("defineVariables")}
-          >
-            <HiInformationCircle
-              className="text-2xl text-center"
-              color="#5302FF"
-            />
-          </div>
-          {variableLetters.map((e, index) => (
-            <div className={index === 0 ? "w-9" : "ml-4 w-9"} key={index}>
-              <Input value={e} disabled={true} isTextCentered />
+        {!testCaseHide && (
+          <div className="flex flex-row mt-5 items-center justify-center">
+            <div
+              className="mr-8 items-center justify-center"
+              onClick={() => openTutorialPopUp("testcaseInterval")}
+            >
+              <HiInformationCircle
+                className="text-2xl text-center"
+                color="#5302FF"
+              />
             </div>
-          ))}
-          {variableLetters.length === 0 && (
-            <div>
-              <Button
-                buttonSize="medium"
-                buttonType="purple"
+            <div className="w-20 ml-3">
+              <Input
+                isTextCentered
+                value={testcaseLowerBound}
+                onChange={(e) => setTestcaseLowerBound(e.target.value)}
+              />
+            </div>
+            <div className="ml-3">
+              <Icon color="#0085FF" width="12" height="12" iconName="leq" />
+            </div>
+            <div className="w-9 ml-3">
+              <Input disabled isTextCentered value={"t"} />
+            </div>
+            <div className="ml-3">
+              <Icon color="#0085FF" width="12" height="12" iconName="leq" />
+            </div>
+            <div className="w-20 ml-3">
+              <Input
+                isTextCentered
+                value={testcaseUpperBound}
+                onChange={(e) => setTestcaseUpperBound(e.target.value)}
+              />
+            </div>
+          </div>
+        )}
+        <div className="container-hider">
+          <p className="font-bold text-base font-poppins mt-12 text-hider">
+            <button
+              className="button-hider"
+              onClick={() =>
+                defineIntegerHide
+                  ? setDefineIntegerHide(false)
+                  : setDefineIntegerHide(true)
+              }
+            >
+              Define Integer Variables
+            </button>
+          </p>
+        </div>
+        {!defineIntegerHide && (
+          <div className="flex flex-row mt-5 justify-center items-center">
+            <div
+              className="mr-8 items-center justify-center"
+              onClick={() => openTutorialPopUp("defineVariables")}
+            >
+              <HiInformationCircle
+                className="text-2xl text-center"
+                color="#5302FF"
+              />
+            </div>
+            {variableLetters.map((e, index) => (
+              <div className={index === 0 ? "w-9" : "ml-4 w-9"} key={index}>
+                <Input value={e} disabled={true} isTextCentered />
+              </div>
+            ))}
+            {variableLetters.length === 0 && (
+              <div>
+                <Button
+                  buttonSize="medium"
+                  buttonType="purple"
+                  onClick={() => {
+                    setIsIntegerPopUpOpen(true);
+                    setIsVariablePopUpOpen(true);
+                  }}
+                >
+                  <div className="flex flex-row justify-center items-center">
+                    Add
+                    <div className="ml-2">
+                      <FaPlus className="text-xs" />
+                    </div>
+                  </div>
+                </Button>
+              </div>
+            )}
+            {variableLetters.length > 0 && (
+              <div
+                className="ml-4"
                 onClick={() => {
                   setIsIntegerPopUpOpen(true);
                   setIsVariablePopUpOpen(true);
                 }}
               >
+                <Icon color="#5302FF" iconName="plus" height="24" width="24" />
+              </div>
+            )}
+          </div>
+        )}
+
+        <div className="container-hider">
+          <p className="font-bold text-base font-poppins mt-12 text-hider">
+            <button
+              className="button-hider"
+              onClick={() =>
+                testCaseFormatHide
+                  ? setTestCaseFormatHide(false)
+                  : setTestCaseFormatHide(true)
+              }
+            >
+              Testcase Format
+            </button>
+          </p>
+        </div>
+        {!testCaseFormatHide && (
+          <div className="flex flex-row mt-5 z-40">
+            <div
+              className="mr-8 items-center justify-center mt-1"
+              onClick={() => openTutorialPopUp("testcaseFormat")}
+            >
+              <HiInformationCircle
+                className="text-2xl text-center"
+                color="#5302FF"
+              />
+            </div>
+            <Dropdown
+              closeMenu={() => setIsVarDDOpen(false)}
+              openMenu={() => setIsVarDDOpen(true)}
+              isOpen={isVarDDOpen}
+              options={variableTypes}
+              selectedOption={selectedVar}
+              changeOption={(e: string) => {
+                setSelectedVar(e);
+                setIsVarDDOpen(false);
+              }}
+              disabledMenuItems={
+                variableLetters.length > 0 ? [] : ["Defined Variable"]
+              }
+            />
+            {selectedVar === "Defined Variable" && (
+              <div className="ml-3">
+                <Dropdown
+                  isOpen={isVarSymbolDDOpen}
+                  closeMenu={() => setIsVarSymbolDDOpen(false)}
+                  openMenu={() => setIsVarSymbolDDOpen(true)}
+                  changeOption={(e: string) => {
+                    setVarSymbolDD(e);
+                    setIsVarSymbolDDOpen(false);
+                  }}
+                  options={variableLetters}
+                  selectedOption={varSymbolDD}
+                />
+              </div>
+            )}
+            <div className="ml-3 w-[84px]">
+              <Button
+                buttonSize="medium"
+                buttonType="purple"
+                onClick={() => {
+                  openPopUp(selectedVar as VariableType);
+                  if (selectedVar === "Defined Variable") {
+                    setSidebarString(
+                      sidebarString +
+                        (savedInputs.length >= 1 &&
+                        isEndLineNeeded(savedInputs[savedInputs.length - 1])
+                          ? "\n"
+                          : "") +
+                        (sidebarString.length > 0 ? " " : "") +
+                        getSidebarInputs("Integer")
+                    );
+                  }
+                }}
+                disabled={isCreateButtonDisabled()}
+              >
                 <div className="flex flex-row justify-center items-center">
-                  Add
+                  Create
                   <div className="ml-2">
-                    <FaPlus className="text-xs" />
+                    <IoMdSettings />
                   </div>
                 </div>
               </Button>
             </div>
-          )}
-          {variableLetters.length > 0 && (
-            <div
-              className="ml-4"
-              onClick={() => {
-                setIsIntegerPopUpOpen(true);
-                setIsVariablePopUpOpen(true);
-              }}
-            >
-              <Icon color="#5302FF" iconName="plus" height="24" width="24" />
-            </div>
-          )}
-        </div>}
-
-        <div className="container-hider">
-          <p className="font-bold text-base font-poppins mt-12 text-hider">
-            <button className="button-hider" onClick={ () => testCaseFormatHide ? setTestCaseFormatHide(false) : setTestCaseFormatHide(true)}>
-            Testcase Format</button>
-          </p>
-        </div>
-         {!testCaseFormatHide && 
-        <div className="flex flex-row mt-5 z-40">
-          <div
-            className="mr-8 items-center justify-center mt-1"
-            onClick={() => openTutorialPopUp("testcaseFormat")}
-          >
-            <HiInformationCircle
-              className="text-2xl text-center"
-              color="#5302FF"
-            />
           </div>
-          <Dropdown
-            closeMenu={() => setIsVarDDOpen(false)}
-            openMenu={() => setIsVarDDOpen(true)}
-            isOpen={isVarDDOpen}
-            options={variableTypes}
-            selectedOption={selectedVar}
-            changeOption={(e: string) => {
-              setSelectedVar(e);
-              setIsVarDDOpen(false);
-            }}
-            disabledMenuItems={
-              variableLetters.length > 0 ? [] : ["Defined Variable"]
-            }
-          />
-          {selectedVar === "Defined Variable" && (
-            <div className="ml-3">
-              <Dropdown
-                isOpen={isVarSymbolDDOpen}
-                closeMenu={() => setIsVarSymbolDDOpen(false)}
-                openMenu={() => setIsVarSymbolDDOpen(true)}
-                changeOption={(e: string) => {
-                  setVarSymbolDD(e);
-                  setIsVarSymbolDDOpen(false);
+        )}
+
+        {!testCaseFormatHide && (
+          <div className="flex flex-row mt-4">
+            <div className="w-fit">
+              <Button
+                buttonSize="medium"
+                buttonType="blue"
+                onClick={() => {
+                  setSidebarString(sidebarString + "\n");
+                  setSavedInputs([...savedInputs, { type: "newLine" }]);
                 }}
-                options={variableLetters}
-                selectedOption={varSymbolDD}
-              />
+              >
+                <div className="flex flex-row justify-center items-center">
+                  Finish Line
+                </div>
+              </Button>
             </div>
-          )}
-          <div className="ml-3 w-[84px]">
-            <Button
-              buttonSize="medium"
-              buttonType="purple"
-              onClick={() => {
-                openPopUp(selectedVar as VariableType);
-                if (selectedVar === "Defined Variable") {
-                  setSidebarString(
-                    sidebarString +
-                      (savedInputs.length >= 1 &&
-                      isEndLineNeeded(savedInputs[savedInputs.length - 1])
-                        ? "\n"
-                        : "") +
-                      (sidebarString.length > 0 ? " " : "") +
-                      getSidebarInputs("Integer")
-                  );
-                }
-              }}
-              disabled={isCreateButtonDisabled()}
-            >
-              <div className="flex flex-row justify-center items-center">
-                Create
-                <div className="ml-2">
-                  <IoMdSettings />
+            <div className="w-fit ml-3">
+              <Button
+                buttonSize="medium"
+                buttonType="red"
+                onClick={resetTestCase}
+              >
+                <div className="flex flex-row justify-center items-center">
+                  Reset Testcase
+                  <div className="ml-3">
+                    <BsFillTrash3Fill />
+                  </div>
                 </div>
-              </div>
-            </Button>
-          </div>
-        </div>}
-
-        {!testCaseFormatHide &&
-        <div className="flex flex-row mt-4">
-          <div className="w-fit">
-            <Button
-              buttonSize="medium"
-              buttonType="blue"
-              onClick={() => {
-                setSidebarString(sidebarString + "\n");
-                setSavedInputs([...savedInputs, { type: "newLine" }]);
-              }}
-            >
-              <div className="flex flex-row justify-center items-center">
-              Finish Line
+              </Button>
+            </div>
+            <div className="w-fit ml-3">
+              <Button
+                buttonSize="medium"
+                buttonType="purple"
+                onClick={undoTestCase}
+              >
+                <div className="flex flex-row justify-center items-center">
+                  Undo Testcase
+                  <div className="ml-3">
+                    <FaUndo className="text-xs" />
+                  </div>
                 </div>
-            </Button>
+              </Button>
+            </div>
           </div>
-          <div className="w-fit ml-3">
-            <Button
-              buttonSize="medium"
-              buttonType="red"
-              onClick={resetTestCase}
-            >
-              <div className="flex flex-row justify-center items-center">
-                Reset Testcase
-                <div className="ml-3">
-                  <BsFillTrash3Fill />
-                </div>
-              </div>
-            </Button>
-          </div>
-          <div className="w-fit ml-3">
-            <Button
-              buttonSize="medium"
-              buttonType="purple"
-              onClick={undoTestCase}
-            >
-              <div className="flex flex-row justify-center items-center">
-                Undo Testcase
-                <div className="ml-3">
-                  <FaUndo className="text-xs" />
-                </div>
-              </div>
-            </Button>
-          </div>
-        </div>}
+        )}
         {isIntegerPopUpOpen && (
           <div className="mt-4 z-50">
             <IntegerPopUp
@@ -839,107 +864,122 @@ export function HackingPage() {
         )}
         <div className="container-hider">
           <p className="font-bold text-base font-poppins mt-12 text-hider">
-            <button className="button-hider" onClick={ () => constraintsHide ? setConstraintsHide(false) : setConstraintsHide(true)}>
-            Testcase Constraints</button>
+            <button
+              className="button-hider"
+              onClick={() =>
+                constraintsHide
+                  ? setConstraintsHide(false)
+                  : setConstraintsHide(true)
+              }
+            >
+              Testcase Constraints
+            </button>
           </p>
         </div>
-        {!constraintsHide &&
-        <div className="flex flex-col mt-3 justify-center items-center">
-          {constrainedVariables.length > 0 &&
-            constrainedVariables.map((e, index) => (
-              <div
-                key={index}
-                className="flex flex-row justify-center items-center mt-2"
-              >
-                <div className="w-9">
-                  <Input value={e.symbol} isTextCentered disabled />
-                </div>
-                <div className="ml-3">
-                  <Icon color="#0085FF" width="12" height="12" iconName="leq" />
-                </div>
-                <div className="w-20 ml-3">
-                  <Input value={e.sumValue} isTextCentered disabled />
-                </div>
+        {!constraintsHide && (
+          <div className="flex flex-col mt-3 justify-center items-center">
+            {constrainedVariables.length > 0 &&
+              constrainedVariables.map((e, index) => (
                 <div
-                  className="ml-4 w-fit"
-                  onClick={() =>
-                    setConstrainedVariables([
-                      ...constrainedVariables.filter(
-                        (elem) => elem.symbol !== e.symbol
-                      ),
-                    ])
-                  }
+                  key={index}
+                  className="flex flex-row justify-center items-center mt-2"
                 >
-                  <BsFillTrash3Fill
-                    className="text-xl text-center"
-                    color="#F03434"
-                  />
+                  <div className="w-9">
+                    <Input value={e.symbol} isTextCentered disabled />
+                  </div>
+                  <div className="ml-3">
+                    <Icon
+                      color="#0085FF"
+                      width="12"
+                      height="12"
+                      iconName="leq"
+                    />
+                  </div>
+                  <div className="w-20 ml-3">
+                    <Input value={e.sumValue} isTextCentered disabled />
+                  </div>
+                  <div
+                    className="ml-4 w-fit"
+                    onClick={() =>
+                      setConstrainedVariables([
+                        ...constrainedVariables.filter(
+                          (elem) => elem.symbol !== e.symbol
+                        ),
+                      ])
+                    }
+                  >
+                    <BsFillTrash3Fill
+                      className="text-xl text-center"
+                      color="#F03434"
+                    />
+                  </div>
                 </div>
-              </div>
-            ))}
-        </div>}
-        {!constraintsHide &&
-        <div className="flex flex-row mt-4 justify-center">
-          <div
-            className="mr-8 items-center justify-center mt-1"
-            onClick={() => openTutorialPopUp("testcaseConstraints")}
-          >
-            <HiInformationCircle
-              className="text-2xl text-center"
-              color="#5302FF"
-            />
+              ))}
           </div>
-          <p className="font-poppins font-bold text-sm mt-2">Sum of</p>
-          <div className="ml-3">
-            <Dropdown
-              isOpen={isTestcaseDDOpen}
-              closeMenu={() => setIsTestcaseDDOpen(false)}
-              openMenu={() => setIsTestcaseDDOpen(true)}
-              options={remainingConstrainableOptions()}
-              changeOption={(e: string) => {
-                setTestcaseDDVariable(e);
-                setIsTestcaseDDOpen(false);
-              }}
-              selectedOption={testcaseDDVariable}
-              disabled={remainingConstrainableOptions().length === 0}
-            />
-          </div>
-          <div className="ml-3 mt-2">
-            <Icon color="#0085FF" width="12" height="12" iconName="leq" />
-          </div>
-          <div className="ml-3 w-20">
-            <Input
-              isTextCentered
-              value={constraintText}
-              onChange={(e) => setConstraintText(e.target.value)}
-            />
-          </div>
-          <div className="w-fit ml-3">
-            <Button
-              buttonSize="large"
-              buttonType="purple"
-              disabled={isConstraintButtonDisabled()}
-              onClick={() => {
-                setConstrainedVariables([
-                  ...constrainedVariables,
-                  {
-                    symbol: testcaseDDVariable,
-                    sumValue: parseInt(constraintText),
-                  },
-                ]);
-                setTestcaseDDVariable("");
-                setConstraintText("");
-              }}
+        )}
+        {!constraintsHide && (
+          <div className="flex flex-row mt-4 justify-center">
+            <div
+              className="mr-8 items-center justify-center mt-1"
+              onClick={() => openTutorialPopUp("testcaseConstraints")}
             >
-              <div className="flex flex-row justify-center items-center">
-                Add
-                <div className="ml-2">
-                  <FaPlus className="text-xs" />
+              <HiInformationCircle
+                className="text-2xl text-center"
+                color="#5302FF"
+              />
+            </div>
+            <p className="font-poppins font-bold text-sm mt-2">Sum of</p>
+            <div className="ml-3">
+              <Dropdown
+                isOpen={isTestcaseDDOpen}
+                closeMenu={() => setIsTestcaseDDOpen(false)}
+                openMenu={() => setIsTestcaseDDOpen(true)}
+                options={remainingConstrainableOptions()}
+                changeOption={(e: string) => {
+                  setTestcaseDDVariable(e);
+                  setIsTestcaseDDOpen(false);
+                }}
+                selectedOption={testcaseDDVariable}
+                disabled={remainingConstrainableOptions().length === 0}
+              />
+            </div>
+            <div className="ml-3 mt-2">
+              <Icon color="#0085FF" width="12" height="12" iconName="leq" />
+            </div>
+            <div className="ml-3 w-20">
+              <Input
+                isTextCentered
+                value={constraintText}
+                onChange={(e) => setConstraintText(e.target.value)}
+              />
+            </div>
+            <div className="w-fit ml-3">
+              <Button
+                buttonSize="large"
+                buttonType="purple"
+                disabled={isConstraintButtonDisabled()}
+                onClick={() => {
+                  setConstrainedVariables([
+                    ...constrainedVariables,
+                    {
+                      symbol: testcaseDDVariable,
+                      sumValue: parseInt(constraintText),
+                    },
+                  ]);
+                  setTestcaseDDVariable("");
+                  setConstraintText("");
+                }}
+              >
+                <div className="flex flex-row justify-center items-center">
+                  Add
+                  <div className="ml-2">
+                    <FaPlus className="text-xs" />
+                  </div>
                 </div>
-              </div>
-            </Button>
+              </Button>
+            </div>
           </div>
-        </div>}
+        )}
         {isTutorialPopUpOpen && (
           <div className="absolute z-50 top-20 left-12">
             <InformationPopUp
@@ -950,86 +990,97 @@ export function HackingPage() {
         )}
         <div className="container-hider">
           <p className="font-bold text-base font-poppins mt-12 text-hider">
-            <button className="button-hider" onClick={ () => fileFormatHide ? setFileFormatHide(false) : setFileFormatHide(true)}>
-            File Format</button>
+            <button
+              className="button-hider"
+              onClick={() =>
+                fileFormatHide
+                  ? setFileFormatHide(false)
+                  : setFileFormatHide(true)
+              }
+            >
+              File Format
+            </button>
           </p>
         </div>
-        { !fileFormatHide &&
-        <div className="flex flex-row mt-5 justify-center">
-          <div
-            className="mr-8 items-center justify-center mt-1"
-            onClick={() => openTutorialPopUp("fileFormat")}
-          >
-            <HiInformationCircle
-              className="text-2xl text-center"
-              color="#5302FF"
-            />
+        {!fileFormatHide && (
+          <div className="flex flex-row mt-5 justify-center">
+            <div
+              className="mr-8 items-center justify-center mt-1"
+              onClick={() => openTutorialPopUp("fileFormat")}
+            >
+              <HiInformationCircle
+                className="text-2xl text-center"
+                color="#5302FF"
+              />
+            </div>
+            <p className="font-poppins font-bold text-sm mt-2">Amount: </p>
+            <div className="ml-3 w-16">
+              <Input
+                isTextCentered
+                value={fileAmount}
+                onChange={(e) => setFileAmount(e.target.value)}
+              />
+            </div>
+            <p className="font-poppins font-bold text-sm ml-4 mt-2">Name: </p>
+            <div className="ml-3 w-20">
+              <Input
+                isTextCentered
+                value={fileName}
+                onChange={(e) => setFileName(e.target.value)}
+              />
+            </div>
+            <p className="font-poppins font-bold text-sm ml-4 mt-2">
+              Extension:{" "}
+            </p>
+            <div className="w-fit ml-3">
+              <Dropdown
+                isOpen={isFileDDOpen}
+                closeMenu={() => setIsFileDDOpen(false)}
+                openMenu={() => setIsFileDDOpen(true)}
+                options={fileExtensionOptions}
+                changeOption={(e: string) => {
+                  setFileExtension(e);
+                  setIsFileDDOpen(false);
+                }}
+                selectedOption={fileExtension}
+              />
+            </div>
+            <p className="font-poppins font-bold text-sm ml-4 mt-2">
+              Numbering:{" "}
+            </p>
+            <div className="w-fit ml-3">
+              <Dropdown
+                isOpen={isNumberingDDOpen}
+                openMenu={() => setIsNumberingDDOpen(true)}
+                closeMenu={() => setIsNumberingDDOpen(false)}
+                options={numberingOptions}
+                selectedOption={numbering}
+                changeOption={(e: string) => {
+                  setNumbering(e);
+                  setIsNumberingDDOpen(false);
+                }}
+              />
+            </div>
           </div>
-          <p className="font-poppins font-bold text-sm mt-2">Amount: </p>
-          <div className="ml-3 w-16">
+        )}
+        {!fileFormatHide && (
+          <div className="w-fit mt-12">
             <Input
-              isTextCentered
-              value={fileAmount}
-              onChange={(e) => setFileAmount(e.target.value)}
+              type="file"
+              accept=".cpp"
+              onChange={(e) => setCodeFileFunc(e.target.files)}
             />
           </div>
-          <p className="font-poppins font-bold text-sm ml-4 mt-2">Name: </p>
-          <div className="ml-3 w-20">
+        )}
+        {!fileFormatHide && (
+          <div className="w-fit mt-12">
             <Input
-              isTextCentered
-              value={fileName}
-              onChange={(e) => setFileName(e.target.value)}
+              type="file"
+              accept=".cpp"
+              onChange={(e) => setCodeFileFunc(e.target.files)}
             />
           </div>
-          <p className="font-poppins font-bold text-sm ml-4 mt-2">
-            Extension:{" "}
-          </p>
-          <div className="w-fit ml-3">
-            <Dropdown
-              isOpen={isFileDDOpen}
-              closeMenu={() => setIsFileDDOpen(false)}
-              openMenu={() => setIsFileDDOpen(true)}
-              options={fileExtensionOptions}
-              changeOption={(e: string) => {
-                setFileExtension(e);
-                setIsFileDDOpen(false);
-              }}
-              selectedOption={fileExtension}
-            />
-          </div>
-          <p className="font-poppins font-bold text-sm ml-4 mt-2">
-            Numbering:{" "}
-          </p>
-          <div className="w-fit ml-3">
-            <Dropdown
-              isOpen={isNumberingDDOpen}
-              openMenu={() => setIsNumberingDDOpen(true)}
-              closeMenu={() => setIsNumberingDDOpen(false)}
-              options={numberingOptions}
-              selectedOption={numbering}
-              changeOption={(e: string) => {
-                setNumbering(e);
-                setIsNumberingDDOpen(false);
-              }}
-            />
-          </div>
-        </div>}
-        { !fileFormatHide &&
-        <div className="w-fit mt-12">
-          <Input
-            type="file"
-            accept=".cpp"
-            onChange={(e) => setCodeFileFunc(e.target.files)}
-          />
-        </div>}
-        { !fileFormatHide &&
-        <div className="w-fit mt-12">
-          <Input
-            type="file"
-            accept=".cpp"
-            onChange={(e) => setCodeFileFunc(e.target.files)}
-          />
-        </div>}
+        )}
         <div className="flex flex-row mt-12">
           <div className="w-fit">
             <Button
@@ -1059,4 +1110,4 @@ export function HackingPage() {
       </div>
     </LayoutPage>
   );
-}
+} //
