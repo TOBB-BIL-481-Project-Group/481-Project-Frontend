@@ -25,7 +25,10 @@ const StartPage = () => {
       await apisignup(name,email,password,"/");
       navigate(PATHS.loading);  // Log successful response
     } catch (error) {
-      navigate(PATHS.error); // Log any errors
+      if (error == "AxiosError: Request failed with status code 500")
+         alert("email's account not found")
+      else
+        alert("your password is not correct")
     }
   };
 
