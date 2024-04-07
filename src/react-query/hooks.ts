@@ -3,6 +3,7 @@ import {
   apiCreateFile,
   apiDeleteFile,
   apiGetFile,
+  apiHackingFile,
   apiUploadCode,
 } from "./queries";
 type CustomMutationProps = {
@@ -33,6 +34,21 @@ export const useCodeUploadMutation = ({
 }: CustomMutationProps = {}) => {
   return useMutation({
     mutationFn: apiUploadCode,
+    onSuccess: (data) => {
+      onSuccess?.(data);
+    },
+    onError: (err) => {
+      onError?.(err);
+    },
+  });
+};
+
+export const useHackingFileMutation = ({
+  onSuccess,
+  onError,
+}: CustomMutationProps = {}) => {
+  return useMutation({
+    mutationFn: apiHackingFile,
     onSuccess: (data) => {
       onSuccess?.(data);
     },

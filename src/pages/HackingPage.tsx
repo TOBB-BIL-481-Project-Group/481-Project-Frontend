@@ -16,8 +16,8 @@ import { FormatSidebar } from "../ui/FormatSidebar";
 import { getSidebarInputs } from "../utils/getSidebarInputs";
 import { convertTypeToContentType } from "../utils/convertTypeToContentType";
 import {
-  useCodeUploadMutation,
   useCreateFileMutation,
+  useHackingFileMutation,
 } from "../react-query/hooks";
 import { fileType, numberingType } from "../react-query/types";
 import { useNavigate } from "react-router-dom";
@@ -36,9 +36,9 @@ import {
 } from "../recoil-store/LastInputStoreHooks";
 import { InformationPopUp, InformationType } from "../ui/InformationPopUp";
 import { HiInformationCircle } from "react-icons/hi";
-import Container from 'react-bootstrap/Container';
-import Navbar from 'react-bootstrap/Navbar';
-import { Link } from 'react-router-dom';
+import Container from "react-bootstrap/Container";
+import Navbar from "react-bootstrap/Navbar";
+import { Link } from "react-router-dom";
 import { NavItem } from "react-bootstrap";
 type ConstrainedVariableType = {
   symbol: string;
@@ -73,6 +73,7 @@ export function HackingPage() {
     "testcaseInterval" as InformationType
   );
   const [codeFile, setCodeFile] = useState<File | null>(null);
+  const [codeFile2, setCodeFile2] = useState<File | null>(null);
 
   const openTutorialPopUp = (e: InformationType) => {
     setIsTutorialPopUpOpen(true);
@@ -95,7 +96,7 @@ export function HackingPage() {
         sidebarString: sidebarString,
         constrainedVariables: constrainedVariables,
       });
-      uploadCodeFile(res.data);
+      uploadTwoCodeFiles(res.data);
     },
     onError: (error) => {
       if (error) {
@@ -110,7 +111,7 @@ export function HackingPage() {
     },
   });
 
-  const codeUploadMutation = useCodeUploadMutation({
+  /*const codeUploadMutation = useCodeUploadMutation({
     onSuccess: (res) => {
       notify.success("Code is uploaded");
       navigate(PATHS.downloadFile, { state: { folderName: res.data } });
@@ -126,8 +127,26 @@ export function HackingPage() {
         }
       }
     },
+  });*/
+  const hackingFileMutation = useHackingFileMutation({
+    onSuccess: (res) => {
+      //BURAYA IF ELSE YAZ
+      notify.success("Code is uploaded");
+      navigate(PATHS.downloadFile, { state: { folderName: res.data } });
+    },
+    onError: (error) => {
+      if (error) {
+        console.log(error.response);
+        if (error.response === undefined) {
+          notify.error(error.message);
+        } else {
+          notify.error(error.response.data);
+          console.log("Error: ", error.response.data);
+        }
+      }
+    },
   });
-
+  /*
   const uploadCodeFile = (userSpecificId: number) => {
     if (codeFile === null) {
       notify.error("Output code is not given");
@@ -136,6 +155,19 @@ export function HackingPage() {
     const formData = new FormData();
     formData.append("codeFile", codeFile);
     codeUploadMutation.mutate({
+      userSpecificId: userSpecificId,
+      codeFile: formData,
+    });
+  };*/
+  const uploadTwoCodeFiles = (userSpecificId: number) => {
+    if (codeFile === null || codeFile2 == null) {
+      notify.error("At least one of the codes is not given");
+      return;
+    }
+    const formData = new FormData();
+    formData.append("codeFile", codeFile);
+    formData.append("codeFile2", codeFile2);
+    hackingFileMutation.mutate({
       userSpecificId: userSpecificId,
       codeFile: formData,
     });
@@ -391,41 +423,60 @@ export function HackingPage() {
       notify.error("Problem in Frontend of Uploading File");
     }
   };
+  const setCodeFileFunc2 = (e: FileList | null) => {
+    if (e != null && e.length >= 1 && findExtension(e[0].name) === "cpp") {
+      setCodeFile2(e[0]);
+    } else {
+      notify.error("Problem in Frontend of Uploading File");
+    }
+  };
 
-  if (createFileMutation.isLoading || codeUploadMutation.isLoading) {
+  if (createFileMutation.isLoading || hackingFileMutation.isLoading) {
     return <Loader />;
   }
 
   return (
     <LayoutPage>
-      <Navbar bg="dark" data-bs-theme="dark" className='justify-content-center '>
-      <Navbar.Brand>
-        Test-Generator
-      </Navbar.Brand>
-        <Link to={PATHS.home} className='me-auto'>Home</Link>
-        <Link to={PATHS.aboutUs} className='me-auto'>About Us</Link>
-        <Link to={PATHS.tutorial} className='me-auto'>Tutorial</Link>
-        <NavItem className='me-auto text-secondary'>Go to Test-Generator</NavItem>
-      <Container>
-        <Navbar.Toggle />
-        <Navbar.Collapse className="justify-content-center">
-          <Navbar.Text>
-            Signed in as: <a href="#login">Muhammed Yılmaz</a>
-          </Navbar.Text>
-        </Navbar.Collapse>
-      </Container>
-    </Navbar>
-    <Navbar bg="gray" data-bs-theme="light" className='justify-content-center '>
-      <Navbar.Brand className="ml-1">
-        Hacking Page
-      </Navbar.Brand>
-        <Link to={PATHS.createFile} className='ml-4 text-danger'>In/Out Page</Link>
-        <NavItem className='ml-5 text-secondary'>Hacking Page</NavItem>
+      <Navbar
+        bg="dark"
+        data-bs-theme="dark"
+        className="justify-content-center "
+      >
+        <Navbar.Brand>Test-Generator</Navbar.Brand>
+        <Link to={PATHS.home} className="me-auto">
+          Home
+        </Link>
+        <Link to={PATHS.aboutUs} className="me-auto">
+          About Us
+        </Link>
+        <Link to={PATHS.tutorial} className="me-auto">
+          Tutorial
+        </Link>
+        <NavItem className="me-auto text-secondary">
+          Go to Test-Generator
+        </NavItem>
         <Container>
+          <Navbar.Toggle />
+          <Navbar.Collapse className="justify-content-center">
+            <Navbar.Text>
+              Signed in as: <a href="#login">Muhammed Yılmaz</a>
+            </Navbar.Text>
+          </Navbar.Collapse>
         </Container>
-    </Navbar>
+      </Navbar>
+      <Navbar
+        bg="gray"
+        data-bs-theme="light"
+        className="justify-content-center "
+      >
+        <Navbar.Brand className="ml-1">Hacking Page</Navbar.Brand>
+        <Link to={PATHS.createFile} className="ml-4 text-danger">
+          In/Out Page
+        </Link>
+        <NavItem className="ml-5 text-secondary">Hacking Page</NavItem>
+        <Container></Container>
+      </Navbar>
       <div className="flex flex-col flex-center justify-center items-center mb-4">
-      
         <div>
           <p className="font-bold text-base font-poppins mt-12">Testcase</p>
         </div>
@@ -595,8 +646,8 @@ export function HackingPage() {
               }}
             >
               <div className="flex flex-row justify-center items-center">
-              Finish Line
-                </div>
+                Finish Line
+              </div>
             </Button>
           </div>
           <div className="w-fit ml-3">
@@ -981,7 +1032,7 @@ export function HackingPage() {
           <Input
             type="file"
             accept=".cpp"
-            onChange={(e) => setCodeFileFunc(e.target.files)}
+            onChange={(e) => setCodeFileFunc2(e.target.files)}
           />
         </div>
         <div className="flex flex-row mt-12">
