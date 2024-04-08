@@ -7,7 +7,7 @@ import { NavItem } from 'react-bootstrap';
 
 const Tutorial = () =>{
   const USERNAME = localStorage.getItem("currentUser");
-  const videoId = "m6OxMCDHz3E";
+  const videoId = "o2IzAK3wm7I";
   const opts = {
     width: "100%",
     borderRadius: "2rem",
