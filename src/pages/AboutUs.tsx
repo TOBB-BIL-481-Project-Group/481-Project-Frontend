@@ -7,19 +7,19 @@ import { NavItem } from 'react-bootstrap';
 
 const AboutUs = () =>{
   return(<div style={{ 
-    backgroundImage: `url(https://wallpapercave.com/wp/wp8063327.jpg)`, // Adjust the path to your image
+    backgroundImage: `url(https://wallpapercave.com/wp/wp8063327.jpg)`,
     backgroundSize: "cover",
     backgroundPosition: "center",
     minHeight: "100vh",
 }}>
     <Navbar bg="dark" data-bs-theme="dark" className='justify-content-center '>
       <Navbar.Brand>
-        About Us
+      &nbsp;Testcase Generator&nbsp;
       </Navbar.Brand>
         <Link to={PATHS.home} className='me-auto'>Home</Link>
         <NavItem className='me-auto text-secondary'>About Us</NavItem>
         <Link to={PATHS.tutorial} className='me-auto'>Tutorial</Link>
-        <Link to={PATHS.createFile} className='me-auto'>Go to Test-Generator</Link>
+        <Link to={PATHS.createFile} className='me-auto'>Generate</Link>
       <Container>
         <Navbar.Toggle />
         <Navbar.Collapse className="justify-content-end">

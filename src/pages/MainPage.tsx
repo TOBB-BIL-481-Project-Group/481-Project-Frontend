@@ -414,7 +414,7 @@ export function MainPage() {
         data-bs-theme="dark"
         className="justify-content-center "
       >
-        <Navbar.Brand>Test-Generator</Navbar.Brand>
+        <Navbar.Brand>&nbsp;Testcase Generator&nbsp;</Navbar.Brand>
         <Link to={PATHS.home} className="me-auto">
           Home
         </Link>
@@ -425,7 +425,7 @@ export function MainPage() {
           Tutorial
         </Link>
         <NavItem className="me-auto text-secondary">
-          Go to Test-Generator
+          Generate
         </NavItem>
         <Container>
           <Navbar.Toggle />
@@ -441,7 +441,7 @@ export function MainPage() {
         data-bs-theme="light"
         className="justify-content-center "
       >
-        <Navbar.Brand className="ml-1">In/Out Page</Navbar.Brand>
+        <Navbar.Brand className="ml-1">Generator Mode:</Navbar.Brand>
         <NavItem className="ml-4 text-secondary">In/Out Page</NavItem>
         <Link to={PATHS.hacking} className="ml-5 text-danger">
           Hacking Page

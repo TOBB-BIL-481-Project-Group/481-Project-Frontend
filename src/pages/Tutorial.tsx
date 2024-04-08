@@ -18,12 +18,12 @@ const Tutorial = () =>{
   return(<div>
     <Navbar bg="dark" data-bs-theme="dark" className='justify-content-center '>
       <Navbar.Brand>
-        Tutorial
+      &nbsp;Testcase Generator&nbsp;
       </Navbar.Brand>
         <Link to={PATHS.home} className='me-auto'>Home</Link>
         <Link to={PATHS.aboutUs} className='me-auto'>About Us</Link>
         <NavItem className='me-auto text-secondary'>Tutorial</NavItem>
-        <Link to={PATHS.createFile} className='me-auto'>Go to Test-Generator</Link>
+        <Link to={PATHS.createFile} className='me-auto'>Generate</Link>
       <Container>
         <Navbar.Toggle />
         <Navbar.Collapse className="justify-content-end">
