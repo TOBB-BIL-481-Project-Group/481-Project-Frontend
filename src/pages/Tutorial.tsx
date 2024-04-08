@@ -20,10 +20,14 @@ const Tutorial = () =>{
       <Navbar.Brand>
       &nbsp;Testcase Generator&nbsp;
       </Navbar.Brand>
-        <Link to={PATHS.home} className='me-auto'>Home</Link>
-        <Link to={PATHS.aboutUs} className='me-auto'>About Us</Link>
-        <NavItem className='me-auto text-secondary'>Tutorial</NavItem>
-        <Link to={PATHS.createFile} className='me-auto'>Generate</Link>
+      &nbsp
+        <Link to={PATHS.home} className='me-auto ms-auto'>Home</Link>
+        &nbsp
+        <Link to={PATHS.aboutUs} className='me-auto ms-auto' style={{whiteSpace:"nowrap"}}>About Us</Link>
+        &nbsp
+        <NavItem className='me-auto ms-auto text-secondary'>Tutorial</NavItem>
+        &nbsp
+        <Link to={PATHS.createFile} className='me-auto ms-auto'>Generate</Link>
       <Container>
         <Navbar.Toggle />
         <Navbar.Collapse className="justify-content-end">
@@ -44,6 +48,14 @@ const Tutorial = () =>{
     <h1>Tutorial</h1>
     <YouTube videoId ={videoId} opts={opts} onReady={videoReady}/>
     </div>
+    <br></br>
+    <div className='items-center justify-center text-center'>
+    Explore our tutorial, and when you're ready, simply click below to start generating your test cases. Happy testing!
+    <br></br>
+    <br></br>
+    <a className="btn btn-primary btn-large" href="/main-1">Generate Test Cases</a>
+    </div>
+    
   </div>)
 };
 export default Tutorial;

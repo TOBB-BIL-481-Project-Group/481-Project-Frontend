@@ -16,10 +16,14 @@ const HomePage = () => {
         <Navbar.Brand>
         &nbsp;Testcase Generator&nbsp;
         </Navbar.Brand>
-          <NavItem className='me-auto text-secondary'>Home</NavItem>
-          <Link to={PATHS.aboutUs} className='me-auto'>About Us</Link>
-          <Link to={PATHS.tutorial} className='me-auto'>Tutorial</Link>
-          <Link to={PATHS.createFile} className='me-auto'>Generate</Link>
+        &nbsp
+          <NavItem className='me-auto ms-auto text-secondary'>Home</NavItem>
+          &nbsp
+          <Link to={PATHS.aboutUs} className='me-auto ms-auto' style={{whiteSpace:"nowrap"}}>About Us</Link>
+          &nbsp
+          <Link to={PATHS.tutorial} className='me-auto ms-auto'>Tutorial</Link>
+          &nbsp
+          <Link to={PATHS.createFile} className='me-auto ms-auto'>Generate</Link>
         <Container>
           <Navbar.Toggle />
           <Navbar.Collapse className="justify-content-end">

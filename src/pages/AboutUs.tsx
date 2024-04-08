@@ -16,10 +16,14 @@ const AboutUs = () =>{
       <Navbar.Brand>
       &nbsp;Testcase Generator&nbsp;
       </Navbar.Brand>
-        <Link to={PATHS.home} className='me-auto'>Home</Link>
-        <NavItem className='me-auto text-secondary'>About Us</NavItem>
-        <Link to={PATHS.tutorial} className='me-auto'>Tutorial</Link>
-        <Link to={PATHS.createFile} className='me-auto'>Generate</Link>
+      &nbsp
+        <Link to={PATHS.home} className='me-auto ms-auto'>Home</Link>
+        &nbsp
+        <NavItem className='me-auto ms-auto text-secondary' style={{whiteSpace:"nowrap"}}>About Us</NavItem>
+        &nbsp
+        <Link to={PATHS.tutorial} className='me-auto ms-auto'>Tutorial</Link>
+        &nbsp
+        <Link to={PATHS.createFile} className='me-auto ms-auto'>Generate</Link>
       <Container>
         <Navbar.Toggle />
         <Navbar.Collapse className="justify-content-end">

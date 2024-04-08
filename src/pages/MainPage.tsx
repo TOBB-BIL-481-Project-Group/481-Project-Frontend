@@ -415,16 +415,20 @@ export function MainPage() {
         className="justify-content-center "
       >
         <Navbar.Brand>&nbsp;Testcase Generator&nbsp;</Navbar.Brand>
-        <Link to={PATHS.home} className="me-auto">
+        &nbsp
+        <Link to={PATHS.home} className="me-auto ms-auto">
           Home
         </Link>
-        <Link to={PATHS.aboutUs} className="me-auto">
+        &nbsp
+        <Link to={PATHS.aboutUs} className="me-auto ms-auto" style={{whiteSpace:"nowrap"}}>
           About Us
         </Link>
-        <Link to={PATHS.tutorial} className="me-auto">
+        &nbsp
+        <Link to={PATHS.tutorial} className="me-auto ms-auto">
           Tutorial
         </Link>
-        <NavItem className="me-auto text-secondary">
+        &nbsp
+        <NavItem className="me-auto ms-auto text-secondary">
           Generate
         </NavItem>
         <Container>
