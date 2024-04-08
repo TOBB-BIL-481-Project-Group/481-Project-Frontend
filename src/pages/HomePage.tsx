@@ -24,9 +24,12 @@ const HomePage = () => {
           </Navbar.Collapse>
         </Container>
       </Navbar>
-      <h1>This is Home Page</h1>
+      <iframe   scrolling="no"
+                title="Local HTML Content"
+                src={`${process.env.PUBLIC_URL}/home-page/index.html`}
+                style={{ position: "absolute", left:"25%", width: '50%', height: '2000px', border: 'none' }}
+            />
       </div>
-      
       )
   };
   
