@@ -40,6 +40,7 @@ import Container from "react-bootstrap/Container";
 import Navbar from "react-bootstrap/Navbar";
 import { Link } from "react-router-dom";
 import { NavItem } from "react-bootstrap";
+import logo from '../media/TG-logo.png';
 type ConstrainedVariableType = {
   symbol: string;
   sumValue: number;
@@ -414,7 +415,9 @@ export function MainPage() {
         data-bs-theme="dark"
         className="justify-content-center "
       >
-        <Navbar.Brand>Test-Generator</Navbar.Brand>
+        <Navbar.Brand>
+          <img src ={logo} width={40} height={50} alt='Logo' />
+        </Navbar.Brand>
         <Link to={PATHS.home} className="me-auto">
           Home
         </Link>

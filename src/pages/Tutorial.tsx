@@ -4,7 +4,7 @@ import YouTube from 'react-youtube';
 import Container from 'react-bootstrap/Container';
 import Navbar from 'react-bootstrap/Navbar';
 import { NavItem } from 'react-bootstrap';
-
+import logo from '../media/TG-logo.png';
 const Tutorial = () =>{
   const videoId = "m6OxMCDHz3E";
   const opts = {
@@ -17,9 +17,9 @@ const Tutorial = () =>{
   };
   return(<div>
     <Navbar bg="dark" data-bs-theme="dark" className='justify-content-center '>
-      <Navbar.Brand>
-        Tutorial
-      </Navbar.Brand>
+    <Navbar.Brand>
+          <img src ={logo} width={40} height={50} alt='Logo' />
+        </Navbar.Brand>
         <Link to={PATHS.home} className='me-auto'>Home</Link>
         <Link to={PATHS.aboutUs} className='me-auto'>About Us</Link>
         <NavItem className='me-auto text-secondary'>Tutorial</NavItem>

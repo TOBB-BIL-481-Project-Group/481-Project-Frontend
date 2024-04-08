@@ -3,13 +3,12 @@ import { PATHS } from "../consts/paths";
 import Container from 'react-bootstrap/Container';
 import Navbar from 'react-bootstrap/Navbar';
 import { NavItem } from 'react-bootstrap';
-
-
+import logo from '../media/TG-logo.png';
 const HomePage = () => {
     return (<div>
       <Navbar bg="dark" data-bs-theme="dark" className='justify-content-center '>
         <Navbar.Brand>
-          Home
+          <img src ={logo} width={40} height={50} alt='Logo' />
         </Navbar.Brand>
           <NavItem className='me-auto text-secondary'>Home</NavItem>
           <Link to={PATHS.aboutUs} className='me-auto'>About Us</Link>
