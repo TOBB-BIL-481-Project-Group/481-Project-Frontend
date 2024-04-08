@@ -429,7 +429,7 @@ export function MainPage() {
         </NavItem>
         <Container>
           <Navbar.Toggle />
-          <Navbar.Collapse className="justify-content-center">
+          <Navbar.Collapse className="justify-content-end">
             <Navbar.Text>
               Signed in as: <a href="#login">Muhammed Yılmaz</a>
             </Navbar.Text>
@@ -1094,16 +1094,16 @@ export function MainPage() {
             </Button>
           </div>
         </div>
-        <div
-          className="fixed top-1/6 right-0 w-1/4 h-2/3"
-          style={{ width: sidebarVisible ? "20%" : "1%" }}
+      </div>
+      <div
+          className="fixed right-0 w-1/4 h-2/3"
+          style={{ top: "20%", width: sidebarVisible ? "20%" : "1%" }}
           onDoubleClick={() => {
             setSidebarVisibility(!sidebarVisible);
           }}
         >
           <FormatSidebar sidebarString={sidebarString} />
         </div>
-      </div>
     </LayoutPage>
   );
 }
