@@ -44,6 +44,7 @@ const Tutorial = () =>{
       minHeight: "30vh",
       borderRadius: "12px",
       overflow: "hidden",
+      textAlign: "center"
     }}>
     <h1>Tutorial</h1>
     <YouTube videoId ={videoId} opts={opts} onReady={videoReady}/>

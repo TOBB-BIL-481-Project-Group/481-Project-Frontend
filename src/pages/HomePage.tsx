@@ -10,7 +10,7 @@ const HomePage = () => {
       backgroundImage: `url(https://wallpapercave.com/wp/wp12684726.jpg)`,
       backgroundSize: "cover",
       backgroundPosition: "center",
-      minHeight: "100vh",
+      minHeight: "200vh",
   }}>
       <Navbar bg="dark" data-bs-theme="dark" className='justify-content-center '>
         <Navbar.Brand>

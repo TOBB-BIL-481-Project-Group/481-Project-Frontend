@@ -466,7 +466,7 @@ export function MainPage() {
           </p>
         </div>
         {!testCaseHide && (
-          <div className="flex flex-row mt-5 items-center justify-center">
+          <div className="flex flex-row mt-2 items-center justify-center">
             <div
               className="mr-8 items-center justify-center"
               onClick={() => openTutorialPopUp("testcaseInterval")}
@@ -516,7 +516,7 @@ export function MainPage() {
           </p>
         </div>
         {!defineIntegerHide && (
-          <div className="flex flex-row mt-5 justify-center items-center">
+          <div className="flex flex-row mt-2 justify-center items-center">
             <div
               className="mr-8 items-center justify-center"
               onClick={() => openTutorialPopUp("defineVariables")}
@@ -579,7 +579,7 @@ export function MainPage() {
           </p>
         </div>
         {!testCaseFormatHide && (
-          <div className="flex flex-row mt-5 z-40">
+          <div className="flex flex-row mt-2 z-40">
             <div
               className="mr-8 items-center justify-center mt-1"
               onClick={() => openTutorialPopUp("testcaseFormat")}
@@ -650,7 +650,7 @@ export function MainPage() {
         )}
 
         {!testCaseFormatHide && (
-          <div className="flex flex-row mt-4">
+          <div className="flex flex-row mt-2">
             <div className="w-fit">
               <Button
                 buttonSize="medium"
@@ -886,7 +886,7 @@ export function MainPage() {
           </p>
         </div>
         {!constraintsHide && (
-          <div className="flex flex-col mt-3 justify-center items-center">
+          <div className="flex flex-col mt-2 justify-center items-center">
             {constrainedVariables.length > 0 &&
               constrainedVariables.map((e, index) => (
                 <div
@@ -927,7 +927,7 @@ export function MainPage() {
           </div>
         )}
         {!constraintsHide && (
-          <div className="flex flex-row mt-4 justify-center">
+          <div className="flex flex-row mt-2 justify-center">
             <div
               className="mr-8 items-center justify-center mt-1"
               onClick={() => openTutorialPopUp("testcaseConstraints")}
@@ -1012,7 +1012,7 @@ export function MainPage() {
           </p>
         </div>
         {!fileFormatHide && (
-          <div className="flex flex-row mt-5 justify-center">
+          <div className="flex flex-row mt-2 justify-center">
             <div
               className="mr-8 items-center justify-center mt-1"
               onClick={() => openTutorialPopUp("fileFormat")}
