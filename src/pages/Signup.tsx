@@ -34,7 +34,7 @@ const Signup = () => {
       await apisignup(name, email, password, "/signup");
       navigate(PATHS.start); // Log successful response
     } catch (error) {
-      if (error === "AxiosError: Request failed with status code 500")
+      if (error == "AxiosError: Request failed with status code 500")
         alert("That account already exist");
       return;
     }

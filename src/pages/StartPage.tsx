@@ -7,7 +7,6 @@ import { useNavigate } from "react-router-dom";
 
 const StartPage = () => {
   // State variables to store form data
-  const [name, setName] = useState("");
   const [email, setEmail] = useState("");
   const [password, setPassword] = useState("");
   const navigate = useNavigate();
@@ -17,15 +16,15 @@ const StartPage = () => {
     event.preventDefault(); // Prevent default form submission behavior
 
     // Collect form data
-    if (name === "" || email === "" || password === "") {
+    if (email === "" || password === "") {
       alert("Please fill all the blanks!");
       return;
     }
     try {
-      await apisignup(name, email, password, "/");
+      await apisignup("", email, password, "/");
       navigate(PATHS.loading); // Log successful response
     } catch (error) {
-      if (error === "AxiosError: Request failed with status code 500")
+      if (error == "AxiosError: Request failed with status code 500")
         alert("email's account not found");
       else alert("your password is not correct");
     }
@@ -57,21 +56,6 @@ const StartPage = () => {
         <h1>Welcome to the Test-Generator Site</h1>
       </div>
       <form onSubmit={handleSubmit} method="post" className="form-container">
-        <label htmlFor="name" className="form-label">
-          Name:
-        </label>
-        <br />
-        <input
-          type="text"
-          id="name"
-          name="name"
-          value={name}
-          onChange={(e) => setName(e.target.value)}
-          className="custom-input"
-        />
-        <br />
-        <br />
-
         <label htmlFor="email" className="form-label">
           Email:
         </label>
