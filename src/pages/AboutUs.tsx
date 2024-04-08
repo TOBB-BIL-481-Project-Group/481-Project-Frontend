@@ -5,7 +5,7 @@ import Navbar from 'react-bootstrap/Navbar';
 import { NavItem } from 'react-bootstrap';
 import logo from '../media/TG-logo.png';
 const AboutUs = () =>{
-  return(<div>
+  return(<div style={{backgroundColor: '#f0f0f0', height:'100vh'}}>
     <Navbar bg="dark" data-bs-theme="dark" className='justify-content-center '>
     <Navbar.Brand>
           <img src ={logo} width={40} height={50} alt='Logo' />
@@ -23,8 +23,9 @@ const AboutUs = () =>{
         </Navbar.Collapse>
       </Container>
     </Navbar>
-    <h1>About Us</h1>
-    <h3>Developers</h3>
+    <h1 style={{alignItems:'center', justifyContent: 'center', display:'flex', marginTop:'30px', fontSize:'48px',}}>About Us</h1>
+    <div style={{justifyContent: 'center', height:'60vh', display:'flex', flexDirection:'column', alignItems:'center', fontSize:'24px',}}>
+    <h1>Developers</h1>
     <ul>
       <li>
         Ahmet Kaan Avcı
@@ -39,7 +40,11 @@ const AboutUs = () =>{
         Kaan Mert Bekleyen
       </li>
     </ul>
-    <h4>Special Thanks to Faruk Avcı</h4>
+    <br></br>
+    <br></br>
+    <h3>Special Thanks to Faruk Avcı</h3>
+    </div>
+    
   </div>)
 };
 export default AboutUs;
