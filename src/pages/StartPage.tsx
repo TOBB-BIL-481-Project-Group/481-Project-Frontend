@@ -23,6 +23,7 @@ const StartPage = () => {
     }
     try {
       await apisignup(name, email, password, "/");
+      localStorage.setItem("currentUser", name)
       navigate(PATHS.loading); // Log successful response
     } catch (error) {
       if (error === "AxiosError: Request failed with status code 500")

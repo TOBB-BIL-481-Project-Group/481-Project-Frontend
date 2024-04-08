@@ -6,6 +6,7 @@ import { NavItem } from 'react-bootstrap';
 
 
 const AboutUs = () =>{
+  const USERNAME = localStorage.getItem("currentUser");
   return(<div style={{ 
     backgroundImage: `url(https://wallpapercave.com/wp/wp8063327.jpg)`,
     backgroundSize: "cover",
@@ -28,7 +29,7 @@ const AboutUs = () =>{
         <Navbar.Toggle />
         <Navbar.Collapse className="justify-content-end">
           <Navbar.Text>
-            Signed in as: <a href="#login">Muhammed Yılmaz</a>
+            Signed in as: <a href="#login">{USERNAME}</a>
           </Navbar.Text>
         </Navbar.Collapse>
       </Container>

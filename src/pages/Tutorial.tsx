@@ -6,6 +6,7 @@ import Navbar from 'react-bootstrap/Navbar';
 import { NavItem } from 'react-bootstrap';
 
 const Tutorial = () =>{
+  const USERNAME = localStorage.getItem("currentUser");
   const videoId = "m6OxMCDHz3E";
   const opts = {
     width: "100%",
@@ -32,7 +33,7 @@ const Tutorial = () =>{
         <Navbar.Toggle />
         <Navbar.Collapse className="justify-content-end">
           <Navbar.Text>
-            Signed in as: <a href="#login">Muhammed Yılmaz</a>
+            Signed in as: <a href="#login">{USERNAME}</a>
           </Navbar.Text>
         </Navbar.Collapse>
       </Container>

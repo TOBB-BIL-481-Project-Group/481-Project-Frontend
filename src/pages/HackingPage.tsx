@@ -46,6 +46,7 @@ type ConstrainedVariableType = {
 };
 
 export function HackingPage() {
+  const USERNAME = localStorage.getItem("currentUser");
   const [testCaseHide, setTestCaseHide] = useState(true);
   const [defineIntegerHide, setDefineIntegerHide] = useState(true);
   const [testCaseFormatHide, setTestCaseFormatHide] = useState(true);
@@ -479,7 +480,7 @@ export function HackingPage() {
           <Navbar.Toggle />
           <Navbar.Collapse className="justify-content-end">
             <Navbar.Text>
-              Signed in as: <a href="#login">Muhammed Yılmaz</a>
+              Signed in as: <a href="#login">{USERNAME}</a>
             </Navbar.Text>
           </Navbar.Collapse>
         </Container>
